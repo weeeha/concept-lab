@@ -134,8 +134,10 @@ take a worktree off `origin/main` (`.claude/worktrees/<slug>-concept`, branch
    `docs/case-studies/vr-museum/diagrams.html`: soft panel, white cards, one dark card, dashed
    card for the least certain part) and render it with a copy of its `render-diagrams.sh`
    (headless Chrome at 2x, crop the panel). 2400 px wide.
-3. Data: the entry goes in **`src/data/candidatePages.ts`** (group `candidates`,
-   `draft: true`), never `projectPages.ts`, whose homepage list a test pins at exactly 22.
+3. Data: the entry goes in **`src/data/conceptPages.ts`** (group `concepts`, shown under
+   "Concepts" on /projects, never on the homepage), never `projectPages.ts` (homepage list
+   pinned at 22) or `candidatePages.ts` (must stay drafts). Set `draft: true` until Nick says
+   publish. A test enforces the labels below; it caught an unlabeled diagram caption once.
    `status: "Concept, not built"`, `tags` start with `"Concept"`, every caption says generated
    or rendered, `currentState` carries the full disclosure. `model` replaces `loop` on the page,
    so the clip goes on the card: crop it to 4:3 and set `hoverVideo`. No GitHub `links` until the
@@ -149,7 +151,10 @@ take a worktree off `origin/main` (`.claude/worktrees/<slug>-concept`, branch
    repo's README table, commit `concepts/<slug>/` on `concept/<slug>`, PR it here too, and log
    decisions with `bin/board decision design-portfolio-site ...`.
 
-Nick publishes by flipping `draft` to false and, for the links, making the repos public.
+Nick publishes by flipping `draft` to false and, for the links, making the repos public and
+adding them to the audit TSV. After merge, check vyhouski.com itself: the first production
+build of PR 126 failed on a transient `next/font/google` fetch while its preview passed; one
+`vercel redeploy` of the failed URL fixed it.
 
 ## Closing line
 
