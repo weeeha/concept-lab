@@ -31,7 +31,7 @@ the thing shipped.
 | Piece | Path |
 |---|---|
 | Working folder | `concepts/<slug>/` in this repo, branch `concept/<slug>` |
-| Code | GitHub `weeeha/<slug>` (public, personal account `weeeha`, email mvyhouski@gmail.com) |
+| Code | GitHub `weeeha/<slug>` (public, personal account `weeeha`, commit email `1083934+weeeha@users.noreply.github.com`; the gmail address is rejected by GitHub's email-privacy rule) |
 | Page | `/vibefolio/<slug>` in `~/ClaudeCode Projects/Design Portfolio Site`, on a branch, PR via `me:ship` |
 | Page source | `docs/case-studies/<slug>-<date>.md` in the portfolio repo, assets in `public/vibefolio/<slug>/` |
 | Page data | an entry in `src/data/projectPages.ts` (copy the shape of an existing vibefolio entry) |
