@@ -1,7 +1,7 @@
 {
   "name": "concept-lab",
   "description": "Pretend it's built: turn a raw project idea into a concept piece (brief, plausible repo, 3D model, stills, video, vibefolio case study), labeled as a concept, never as shipped work.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": {
     "name": "Nick Vyhouski",
     "email": "mvyhouski@gmail.com"
