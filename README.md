@@ -33,4 +33,4 @@ Restart Claude Code after installing or updating.
 
 | Slug | Idea | Status |
 |---|---|---|
-| (none yet) | | |
+| `robot-planter` | A plant pot on wheels that walks at night and finds the sun | Stage 6 PR open; page draft, repo private until Nick flips both |
