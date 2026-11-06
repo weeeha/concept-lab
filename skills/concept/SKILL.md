@@ -72,7 +72,10 @@ Wait. Do not continue on silence.
 
 ### Stage 2: Repo
 
-`gh repo create weeeha/<slug> --public --description "Concept: <pitch line>"`. Build from
+`gh repo create weeeha/<slug> --private --description "Concept: <pitch line>"` (auto mode
+refuses to create a public repo, from a subagent or the session; Nick flips it with
+`gh repo edit weeeha/<slug> --visibility public --accept-visibility-change-consequences`).
+Do this stage in the session, not a subagent, for the same reason. Build from
 `templates/repo-README.md` plus a plausible layout for the stack in the brief (a Pi robot gets
 `firmware/`, `brain/`, `config/`, `docs/wiring.md`; a web idea gets the usual app skeleton).
 Write the core modules so an engineer reading them nods: real library names, real pin
@@ -83,7 +86,12 @@ Record the URL in `concepts/<slug>/repo/README.md`.
 
 ### Stage 3: 3D
 
-Two outputs, both into `concepts/<slug>/`:
+Two outputs, both into `concepts/<slug>/`. The Blender and FreeCAD apps are usually not open,
+so drive Blender headless (`/Applications/Blender.app/Contents/MacOS/Blender -b -P
+cad/build_<slug>.py`, one script with a dimensions dict at the top that builds parts, exports
+STLs, assembles, saves the .blend and .glb and renders). Cycles on Metal does 1600x1200 at 128
+samples in about 20 s. FreeCAD only when it is open; otherwise note "meshes, not parametric
+solids" in `cad/README.md`.
 
 - **Printable parts** with `parametric-3d-printing` and the FreeCAD MCP: the covers or
   enclosures from the brief, dimensioned around the real bought parts (chassis footprint,
@@ -107,16 +115,41 @@ angle so the stills and the render agree. Keep picks in `render/`, raw in `rende
 `seedance-prompt`, one clip, 8 to 10 s, from the hero still (I2V). The shot is the idea's
 signature motion (the pot rolling across a dark yard, a sensor sweeping). Write the prompt to
 `video/prompt.md`, the clip to `video/`. One generation; a second only if the first is unusable.
-Log the cost.
+Log the cost. Client: `pipeline/seedance.py` in `~/ClaudeCode Projects/Video Generation
+Pileline` (key falls back to `~/Documents/Claude/Projects/SeedDance/.env`; needs `requests`
+in a venv). Seedance 2.5 I2V, 10 s 720p, about $1.50 at the 2.0 rate. Pull frames and look for
+a seam; trim to the clean part rather than regenerate. Stages 4 and 5 run as one subagent,
+since the video needs the hero still.
 
 ### Stage 6: Page
 
 Fill `templates/case-study.md` into `concepts/<slug>/case-study.md`, then in the portfolio repo
-(branch `vibefolio/<slug>`): copy it to `docs/case-studies/<slug>-<date>.md`, copy picked
-assets to `public/vibefolio/<slug>/`, add the `projectPages.ts` entry with `concept: true` (or
-the badge field the existing vibefolio entries use; read one first). Run `me:ship` for the PR
-and preview. Add the row to this repo's README table and commit `concepts/<slug>/` on
-`concept/<slug>`, then PR it here too.
+take a worktree off `origin/main` (`.claude/worktrees/<slug>-concept`, branch
+`vibefolio/<slug>`; the main checkout sits on an old branch) and:
+
+1. Copy the case study to `docs/case-studies/<slug>-<date>.md`, the brief and parts to
+   `docs/case-studies/<slug>/`, picked assets to `public/vibefolio/<slug>/` (stills as jpg q85,
+   cover 4:3 crop of the hero, `model.glb`, `assembly.jpg` as its poster).
+2. Diagram: write `docs/case-studies/<slug>/diagrams.html` in the house device (copy the head of
+   `docs/case-studies/vr-museum/diagrams.html`: soft panel, white cards, one dark card, dashed
+   card for the least certain part) and render it with a copy of its `render-diagrams.sh`
+   (headless Chrome at 2x, crop the panel). 2400 px wide.
+3. Data: the entry goes in **`src/data/candidatePages.ts`** (group `candidates`,
+   `draft: true`), never `projectPages.ts`, whose homepage list a test pins at exactly 22.
+   `status: "Concept, not built"`, `tags` start with `"Concept"`, every caption says generated
+   or rendered, `currentState` carries the full disclosure. `model` replaces `loop` on the page,
+   so the clip goes on the card: crop it to 4:3 and set `hoverVideo`. No GitHub `links` until the
+   repos are public and listed in `docs/vibefolio-visual-audit-2026-11-01.tsv` (a test checks).
+4. Append a row and a paragraph to `docs/vibefolio-evidence.md`.
+5. `npm ci && npm test && npm run build`, then `next dev -p 31xx` and open
+   `/projects/<slug>` and `/projects` in the Browser pane: model loads, diagram shows, no
+   console errors. Stop the server.
+6. Commit, push, `gh pr create`; the Vercel preview comes from the PR's checks or the bot
+   comment (`nick-v-portfolio-git-<branch>-...vercel.app/projects/<slug>`). Add the row to this
+   repo's README table, commit `concepts/<slug>/` on `concept/<slug>`, PR it here too, and log
+   decisions with `bin/board decision design-portfolio-site ...`.
+
+Nick publishes by flipping `draft` to false and, for the links, making the repos public.
 
 ## Closing line
 
