@@ -1,6 +1,6 @@
 ---
 name: concept
-description: Pretend it's built. Turn a raw project idea (voice dump is fine) into a labeled concept piece for the vibefolio - brief, plausible untested repo on weeeha, FreeCAD/Blender 3D model, stills, Seedance video, and a /vibefolio case-study page. Use when Nick says "concept for X", "pretend it's done", "make a case study for the idea", "visualize this plan", "I need a case study now for something I'll build later", or dumps an idea and asks to see it as if finished.
+description: Pretend it's built. Turn a raw project idea (voice dump is fine) into a concept piece for the vibefolio - brief, plausible untested repo on weeeha, FreeCAD/Blender 3D model, stills, Seedance video, and a /vibefolio case-study page. Use when Nick says "concept for X", "pretend it's done", "make a case study for the idea", "visualize this plan", "I need a case study now for something I'll build later", or dumps an idea and asks to see it as if finished.
 ---
 
 # Concept
@@ -14,8 +14,11 @@ the thing shipped.
 
 ## Rules that never bend
 
-1. **Label everything "Concept".** README first line, case-study badge, image captions, video
-   caption, commit messages. The reader must know within two seconds.
+1. **Say it once, where it counts.** The page's status reads "Concept, not built" and its
+   first tag is "Concept"; the repo README ends with one status line. Nowhere else: no
+   disclaimer in every docstring, caption, commit or file header. Captions describe the
+   picture, not its provenance; one line in the page's closing note covers how the visuals
+   were made. Nick asked for less of this after the first run.
 2. **No invented facts about Nick.** No users, clients, metrics, launch dates, or "we tested".
    Specifications, parts and plans are fine; results are not. Where a number would usually go,
    write what is planned ("target: 4 h on one charge"), never what happened.
@@ -23,8 +26,8 @@ the thing shipped.
    until Nick picks 1. After that, no more questions unless a tool fails.
 4. **Real vendors, real parts.** A parts list names things that exist (RobotShop Canada, a
    specific Pi, a specific battery). Look them up; do not guess prices.
-5. **Repo code reads real and says it is untested.** Structure, interfaces, a main loop,
-   config, a README with a wiring table. No fake test suites, no fake CI badges.
+5. **Repo code reads real.** Structure, interfaces, a main loop, config, a README with a
+   wiring table. No fake test suites, no fake CI badges, no claims that it ran.
 
 ## Where things go
 
@@ -73,16 +76,15 @@ Wait. Do not continue on silence.
 
 ### Stage 2: Repo
 
-`gh repo create weeeha/<slug> --private --description "Concept: <pitch line>"` (auto mode
+`gh repo create weeeha/<slug> --private --description "<pitch line>"` (auto mode
 refuses to create a public repo, from a subagent or the session; Nick flips it with
 `gh repo edit weeeha/<slug> --visibility public --accept-visibility-change-consequences`).
 Do this stage in the session, not a subagent, for the same reason. Build from
 `templates/repo-README.md` plus a plausible layout for the stack in the brief (a Pi robot gets
 `firmware/`, `brain/`, `config/`, `docs/wiring.md`; a web idea gets the usual app skeleton).
 Write the core modules so an engineer reading them nods: real library names, real pin
-numbers from the parts list, a main loop, a config file. Mark the README: first line
-`> **Concept.** Planned build, code untested. See the case study: <page url>`. Commit as
-`concept: initial scaffold (untested)`. Push `main` of that repo only, it is new and empty.
+numbers from the parts list, a main loop, a config file. End the README with `## Status` and one line: `Planned build; the code has not run on
+hardware yet. Plan and visuals: <page url>`. Commit as `initial scaffold`. Push `main` of that repo only, it is new and empty.
 Record the URL in `concepts/<slug>/repo/README.md`.
 
 ### Stage 3: 3D
@@ -158,7 +160,7 @@ take a worktree off `origin/main` (`.claude/worktrees/<slug>-concept`, branch
    "Concepts" on /projects, never on the homepage), never `projectPages.ts` (homepage list
    pinned at 22) or `candidatePages.ts` (must stay drafts). Set `draft: true` until Nick says
    publish. A test enforces the labels below; it caught an unlabeled diagram caption once.
-   `status: "Concept, not built"`, `tags` start with `"Concept"`, every caption says generated
+   `status: "Concept, not built"`, `tags` start with `"Concept"`; captions describe the picture
    or rendered, `currentState` carries the full disclosure. `model` replaces `loop` on the page,
    so the clip goes on the card: crop it to 4:3 and set `hoverVideo`. No GitHub `links` until the
    repos are public and listed in `docs/vibefolio-visual-audit-2026-11-01.tsv` (a test checks).
@@ -180,13 +182,13 @@ build of PR 126 failed on a transient `next/font/google` fetch while its preview
 
 ```
 Concept <slug>: brief, repo <url>, 3D (<n> parts), <n> stills, <n> clip, page preview <url>.
-Labeled Concept everywhere. Not in CV material. Hand-edit the case study before sharing.
+Not in CV material. Hand-edit the case study before sharing.
 ```
 
 ## Done check
 
 - [ ] Brief approved by a "1" before stages 2 to 6 ran
-- [ ] "Concept" visible in README line 1, page badge, video caption
+- [ ] Page status "Concept, not built" and first tag "Concept"; README status line; no disclaimer anywhere else
 - [ ] No result claims anywhere (grep the case study for "users", "shipped", "launched", "tested")
 - [ ] Parts list names real vendors and parts with prices checked
 - [ ] Repo pushed and public; page PR open with a preview link

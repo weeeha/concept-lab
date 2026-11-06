@@ -6,10 +6,9 @@ video and a vibefolio page. Nick's global rules apply (`~/.claude/CLAUDE.md`).
 
 ## The one rule that matters
 
-**Everything made here is a concept and says so.** Never invent facts about Nick: no clients,
-no metrics, no "shipped", no "in production", no "users". Every artifact carries the word
-"Concept" where a reader will see it first (README first line, case-study badge, video
-caption, commit messages). A concept piece never feeds the CV side (`me:apply`, `me:company`,
+**A concept says so once.** The page status ("Concept, not built") and one README status
+line; no disclaimer in every file, caption and commit. Never invent facts about Nick: no
+clients, no metrics, no "shipped", no "in production", no "users". A concept piece never feeds the CV side (`me:apply`, `me:company`,
 nicks-bio). If a concept later gets built for real, the case study is rewritten from repo
 evidence, not promoted in place.
 

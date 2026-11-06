@@ -5,7 +5,7 @@
 **Assets:** `public/vibefolio/<slug>/` (hero still, two more stills, printed-part render, `model.glb`, `clip.mp4`).
 **Code:** https://github.com/weeeha/<slug> (scaffold, untested).
 
-TL;DR: <three lines in plain words: what it is, what it would do, why it is fun or useful. Say "concept" in the first sentence.>
+TL;DR: <three lines in plain words: what it is, what it would do, why it is fun or useful. >
 
 ---
 
@@ -29,7 +29,7 @@ TL;DR: <three lines in plain words: what it is, what it would do, why it is fun 
 
 ## Seeing it
 
-<Hero still, caption "Concept render". Video, caption "Concept clip, generated". Model viewer.>
+<Hero still, detail, night and dock photos with captions that describe the picture. Model viewer.>
 
 ## Build plan
 
@@ -41,4 +41,4 @@ TL;DR: <three lines in plain words: what it is, what it would do, why it is fun 
 
 ---
 
-*Concept piece. Nothing here has been built or tested yet; the repo is a scaffold. When it gets built, this page is rewritten from what actually happened.*
+*Planned, not built yet. The photos are renders of the model made photographic.*
