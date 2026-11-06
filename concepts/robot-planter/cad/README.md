@@ -4,36 +4,40 @@
 > `build_robot_planter.py`; fit against the real Dagu chassis, Pi and battery is unchecked.
 
 Four printed parts, all PETG. Sizes are as exported (STL in millimetres, z = 0 on the bed).
-Dimensions live in the `D = dict(...)` block at the top of the script.
+Dimensions live in the `D = dict(...)` block at the top of the script. Front of the robot (the sensor
+eyes) faces +X in Blender; in the GLB it also faces +X (glTF is Y-up, so Blender +Y becomes glTF -Z).
 
 | Part | STL | Size (mm, x y z) | What it does | Est. print (parts.md) |
 |---|---|---|---|---|
-| Shell ring + pot cradle | `shell-ring-cradle.stl` | 240 x 240 x 152 | 110 mm tall, 3 mm wall ring around the chassis, 6 mm deck, 40 mm tapered collar gripping a 150/110 x 130 mm pot (1.5 mm clearance). Four wheel arches, four 2.5 mm screw posts down to the chassis, 56 mm drain opening, cable hole and four screw holes for the mast, four rain slots in the deck. | ~9 h |
-| Sensor mast + rain hood | `sensor-mast.stl` | 51 x 50 x 194 | 20 mm OD tube (2 mm wall), 180 mm tall, 50 mm hollow cone hood on top (hood adds 14 mm), 40 mm flange, HC-SR04 head with two 16 mm eyes facing forward, light-sensor window. Sits at the front of the deck. | ~2 h |
-| Dock ramp | `dock-ramp.stl` | 120 x 220 x 39 | 220 mm wide, 120 mm long, 25 mm rise, side rails, backstop (the extra 14 mm), two contact holders 60 mm apart with 8 mm spring-pin bores and M3 clamp holes. | ~5 h |
-| Battery tray | `battery-tray.stl` | 183 x 56 x 25 | Pocket for a 155 x 48 x 40 mm pack (+1 mm clearance each side), 3 mm walls 22 mm high, two 4 x 36 mm strap slots with underside channels, two finger scoops, two M3 ears. | ~2 h |
+| Shell (one body) | `shell-ring-cradle.stl` (name kept so links do not break) | 248 x 248 x 105 | Low tapered tub, 250 mm at the skirt, 225 mm at the flat top rim, 105 mm tall, soft fillets top and bottom, 3.5 mm walls, 12 mm lid. A 60 mm deep tapered pocket holds the 15 cm pot (1.5 mm clearance) so about 70 mm of the pot shows. Four small wheel arches, 10 mm ground gap, drain hole, shallow rounded recess in the front face for the two 16 mm ultrasonic transducers (26 mm apart), mast cable hole and four screw holes. | ~9 h |
+| Sensor mast + hood | `sensor-mast.stl` | 53 x 50 x 202 | 16 mm OD tube, 28 mm flange, 200 mm tall above the rim, centre rod up through the dark light-sensor head (bought, ribbed) into a curved hood, 50 mm wide, bent forward. No cone. | ~2 h |
+| Dock ramp | `dock-ramp.stl` | 120 x 230 x 90 | 25 mm rise wedge, rounded backrest 90 mm tall, two side wings, two 8 mm bores for the spring-contact posts, LED seat on top, cable exit. | ~5 h |
+| Battery tray | `battery-tray.stl` | 183 x 56 x 25 | Pocket for a 155 x 48 x 40 mm pack (+1 mm clearance each side), 3 mm walls 22 mm high, two strap slots with underside channels, two finger scoops, two M3 ears. | ~2 h |
 
-Total about 18 h of print time. Mesh check on the STLs: 0 non-manifold edges each (Blender bmesh).
+Not printed, modelled for the renders: terracotta pot, procedural pothos (heart-shaped leaf meshes on curved stems,
+some trailing over the rim), two spring-contact posts with brass coils, dome LED, dock cable, chassis, Pi and battery stand-ins.
 
 ## Known fit issues, read before printing
 
-- **Shell is 240 mm across.** It does not fit a 220 mm bed. A 256 mm bed (Bambu class) takes it,
-  otherwise split it in two halves. Print it deck-down (flipped) so the deck needs no bridging.
-- **Chassis corners.** A 200 x 150 mm box has a 250 mm diagonal; inside a 234 mm ring it only fits
-  because the stand-in chassis has 30 mm rounded corners. The real Dagu plate has square corners,
-  so measure it, then raise `shell_od` or trim the plate.
-- **Wheels** are placed at x = +/-70 mm, wheel width 26 mm, from the spec, not measured.
-- Dock ramp is a solid wedge (about 410 cm3): use low infill. Contact positions are placeholders
-  until the pot's rear contacts are designed.
-- Battery sits on the tray at y = +40 mm, the Pi at y = -45 mm, both under the deck with about 3 mm
-  to spare over the pack; the Pi and pack are stand-in boxes.
+- **Shell is 250 mm across at the skirt** (248 mm as exported with the bottom fillet). A 256 mm bed (Bambu class) takes it
+  only just; otherwise split it. Print it rim-down (flipped) so the open skirt side is not bridged.
+- **Pot pocket versus the stand-ins.** The pot sits 60 mm into the shell, so its bottom (z = 55 mm) is below the top of the
+  battery (z = 79 mm) and the Pi. The stand-ins overlap the pocket tube in the model; the real pack (155 x 48 x 40 mm) does not
+  fit under a 60 mm pot sink. Needs a flatter pack, a shallower sink, or the pack moved beside the pocket (the annulus is too narrow
+  for the 155 mm length). Fit against the real chassis is unchecked.
+- **Wheels** were moved inward to x = +/-48 mm, y = +/-80 mm (was 70 / 86.5) so they sit inside the new tub and show only
+  through the small arches and the 10 mm skirt gap. Measure the real Dagu wheelbase before trusting this.
+- Dock ramp is a solid wedge: use low infill. The contact posts, LED and cable are stand-ins; the robot has no rear contacts yet.
 
 ## Files
 
-- `build_robot_planter.py`: builds the four parts, exports STLs, builds the assembly, saves the
-  blend and GLB, renders both images.
-- `../blender/robot-planter.blend`, `../blender/robot-planter.glb` (whole assembly, no Draco).
+- `build_robot_planter.py`: builds the four parts, exports STLs, builds the assembly, saves the blend and GLB, renders the
+  assembly, exploded view and four photo-shot scenes.
+- `../blender/robot-planter.blend`, `../blender/robot-planter.glb` (robot and ramp, no Draco; procedural leaf and transducer
+  materials fall back to flat colours in the GLB).
 - `../render/assembly-hero.png`, `../render/parts-exploded.png` (1600 x 1200).
+- `../render/shots/hero-blender.png`, `detail-blender.png`, `night-blender.png`, `dock-blender.png` (1672 x 941): Blender
+  renders that the image model turns into photographs.
 
 ## Re-run
 
@@ -41,6 +45,7 @@ Total about 18 h of print time. Mesh check on the STLs: 0 non-manifold edges eac
 "/Applications/Blender.app/Contents/MacOS/Blender" -b -P build_robot_planter.py -- --engine cycles --samples 128
 ```
 
-Options after `--`: `--engine cycles|eevee`, `--samples N`, `--no-render` (STL, blend, GLB only, about 4 s).
-Tested on Blender 5.1.1, macOS; Cycles uses Metal if available, about 15 s per image at 128 samples.
+Options after `--`: `--engine cycles|eevee`, `--samples N`, `--no-render` (STL, blend, GLB only, about 4 s),
+`--only assembly,exploded,hero,detail,night,dock` (render a subset).
+Tested on Blender 5.1.1, macOS; Cycles uses Metal if available, 10 to 25 s per image at 128 samples (all six about 2 to 4 min).
 No FreeCAD file: the parts are Blender meshes, not parametric solids (`.FCStd` not produced).

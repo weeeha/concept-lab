@@ -41,9 +41,10 @@ Slug: lowercase, hyphens, two or three words (`robot-planter`).
 ## Pipeline
 
 Run stages in order. Each stage appends one line to `concepts/<slug>/log.md`: what ran, tool,
-cost, skipped-and-why. Stages 2 to 5 are independent once the brief is approved: dispatch them
-as subagents in parallel (Sonnet for 2 and 4, the session model for 3 and 5 since those drive
-MCP tools), then run 6 when all four are back.
+cost, skipped-and-why. Order after the brief: stage 2 (repo, in the session) runs alongside
+stage 3 (3D, a Sonnet subagent). Stages 4 and 5 wait for stage 3, because **the Blender model is
+the single source of truth for what the object looks like**: every still is a Blender render
+turned into a photo, and the clip starts from one of those stills. Then stage 6.
 
 ### Stage 1: Brief (gate)
 
@@ -103,12 +104,31 @@ solids" in `cad/README.md`.
 
 If a tool is not reachable, write the model description into `cad/README.md` and continue.
 
-### Stage 4: Stills
+Design the model to look like the finished product, not a stand-in kit: one designed body,
+the sensors where a reader expects them, real-looking plant or contents. It is what the
+reader turns in the 3D viewer and what every photo shows. For each shot in the brief's shot
+list, add a camera and a rough set (ground plane, a wall, key light direction) to the same
+script and render `render/shots/<shot>-blender.png` at 1672x941.
 
-`codex-image`, three to four images, prompts in `render/prompts.md`. Shot list: hero in the
-place it would live (Nick's balcony, a Montreal sidewalk at night, a yard), a detail of the
-printed part, one "caught in the act" shot. Match the brief's materials and the Blender hero
-angle so the stills and the render agree. Keep picks in `render/`, raw in `render/raw/`.
+### Stage 4: Stills (Blender render → photo)
+
+Never generate a still from text alone: the first robot-planter run did, and the four stills
+and the 3D viewer showed four different objects. For each `render/shots/<shot>-blender.png`:
+
+```bash
+bash ~/.claude/skills/codex-image/scripts/codex-image.sh -s landscape \
+  -r render/shots/<shot>-blender.png -o render/raw/<shot>-v1.png \
+  "Turn this 3D render into a real photograph. Keep the object's exact shape, proportions, \
+parts, placement and the camera angle unchanged; change only materials, lighting and \
+surroundings: <setting from the brief>. Photographic, <lens>, no text." 2> render/raw/<shot>.log
+```
+
+Bash `timeout: 300000`, about 40k plan tokens each, free on the ChatGPT plan. Then compare
+each photo with its render side by side (`render/compare.png`, a 2-up per shot) and check the
+object matches: body shape, sensor placement, mast and hood, wheel count. A drifted image is
+re-run once with the drift named in the prompt ("the mast is at the rear right, not the
+front"); a second drift means the render needs a clearer camera, not more prompts. Keep picks
+in `render/`, prompts in `render/prompts.md`.
 
 ### Stage 5: Video
 
@@ -118,8 +138,8 @@ signature motion (the pot rolling across a dark yard, a sensor sweeping). Write 
 Log the cost. Client: `pipeline/seedance.py` in `~/ClaudeCode Projects/Video Generation
 Pileline` (key falls back to `~/Documents/Claude/Projects/SeedDance/.env`; needs `requests`
 in a venv). Seedance 2.5 I2V, 10 s 720p, about $1.50 at the 2.0 rate. Pull frames and look for
-a seam; trim to the clean part rather than regenerate. Stages 4 and 5 run as one subagent,
-since the video needs the hero still.
+a seam; trim to the clean part rather than regenerate. The first frame is the stage-4 hero
+photo, so the clip shows the same object as the model.
 
 ### Stage 6: Page
 
