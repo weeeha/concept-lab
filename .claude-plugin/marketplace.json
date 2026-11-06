@@ -1,0 +1,14 @@
+{
+  "name": "concept-lab-marketplace",
+  "owner": {
+    "name": "Nick Vyhouski",
+    "email": "mvyhouski@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "concept-lab",
+      "source": "./",
+      "description": "Pretend it's built: idea in, concept piece out."
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+.DS_Store
+.superpowers/
+node_modules/
+*.blend1
+# large generated media stays out of git; keep the final picks only
+concepts/*/render/raw/
+concepts/*/video/raw/
