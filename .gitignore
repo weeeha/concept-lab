@@ -5,3 +5,6 @@ node_modules/
 # large generated media stays out of git; keep the final picks only
 concepts/*/render/raw/
 concepts/*/video/raw/
+
+# other sessions' worktrees live here; never commit them
+.claude/worktrees/
