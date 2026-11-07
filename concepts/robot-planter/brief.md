@@ -42,7 +42,7 @@ flowchart LR
 
 | Bought | Printed | Written |
 |---|---|---|
-| Chassis with motors, Pi, motor HAT, battery + charger, dock contacts, moisture + light + ultrasonic sensors, 15 cm pot | Shell that hides the chassis and cradles the pot, sensor mast with rain hood, dock ramp with contact holders, battery tray | `brain/` scheduler and rules, `firmware/` motor, sensor and power drivers, `config/` geofence and quiet hours, a `log.jsonl` of every decision |
+| Chassis with motors, Pi, motor HAT, battery + charger, dock contacts, moisture + light + ultrasonic sensors, 15 cm pot | Shell that hides the chassis and cradles the pot, clear dome for the light sensor, dock ramp with contact holders, battery tray | `brain/` scheduler and rules, `firmware/` motor, sensor and power drivers, `config/` geofence and quiet hours, a `log.jsonl` of every decision |
 
 Parts with prices: `parts.md`.
 
@@ -54,12 +54,12 @@ Parts with prices: `parts.md`.
 | 2 | Pi drives the motors from a script, encoders count, ultrasonic stops it. | Rolls 2 m on the floor and stops at a shoe |
 | 3 | Scheduler with rules and a geofence, runs for a day on the balcony with a log. | Log shows at least one sun move and one home move |
 | 4 | Dock: ramp, contacts, beacon. Pot finds it from 1 m. | Three docks out of three, battery rising in the log |
-| 5 | Full shell and mast, real pot and plant, two weeks outside. | Plant alive, pot still inside the fence, a video of a night wander |
+| 5 | Full shell and dome, real pot and plant, two weeks outside. | Plant alive, pot still inside the fence, a video of a night wander |
 
 ## What the case study shows
 
 - Stills: hero in a Montreal backyard at dusk, pot mid-roll on patio stones; printed shell
-  detail with the mast; "caught in the act", a phone photo from a window at night, motion blur.
+  detail with the sensor eyes; "caught in the act", a phone photo from a window at night, motion blur.
 - Video: 8 to 10 s, the pot rolling slowly across a dark yard, one porch light, stops, settles.
 - Diagram: the flowchart above.
 - 3D: assembly viewer (GLB), shell over chassis, pot in the cradle.

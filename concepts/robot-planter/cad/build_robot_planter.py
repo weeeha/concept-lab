@@ -28,11 +28,9 @@ D = dict(
     # sensor recess + eyes on the front (+X) face
     recess_w=0.066, recess_h=0.036, recess_depth=0.004, recess_r=0.010, eye_y=0.030, eye_z=0.052,
     eye_d=0.016, eye_gap=0.026, eye_len=0.0075,
-    # mast (printed tube + hood, bought dark light-sensor head)
-    mast_od=0.016, mast_wall=0.002, mast_h=0.200, mast_xy=(-0.015, 0.089),
-    mast_flange_d=0.028, mast_flange_t=0.004,
-    head_d=0.022, head_z0=0.168, head_h=0.024,
-    hood_w=0.050, hood_R=0.032, hood_t0=-0.80, hood_t1=1.00, hood_t=0.0025,
+    # light sensor: frosted dome in a thin white ring, flush in the rear top rim (replaces the old mast)
+    sensor_d=0.022, dome_h=0.008, sensor_xy=(-0.0143, 0.0843), sensor_tilt_deg=4.0, ring_w=0.0017, ring_h=0.003,
+    plant_gap_xy=(-0.015, 0.089),   # direction where the pothos is kept low (was the mast position; kept so the plant is unchanged)
     # pothos
     pothos_seed=11, n_upright=13, n_trail=3, trail_angle=-55.0, leaf_len=0.072,
     # dock ramp (printed) + bought contacts/LED/cable
@@ -383,58 +381,14 @@ def build_shell():
     bevel(prism, D["recess_r"], 6, 20)
     cut(prism, cone("_keep", RB - rd, RT - rd, H, z0=0, verts=128))
     cut(shell, prism)
-    # mast: cable hole + 4 flange screw holes
-    mx, my = D["mast_xy"]
-    cut(shell, cyl("_mh", 0.0055, 0.04, x=mx, y=my, z0=H - 0.035, verts=32))
-    for a in range(4):
-        ang = math.pi / 4 + a * math.pi / 2
-        cut(shell, cyl("_sh", 0.0016, 0.02, x=mx + 0.0105 * math.cos(ang), y=my + 0.0105 * math.sin(ang), z0=H - 0.012, verts=16))
+    # light-sensor seat: shallow round recess in the rear top rim, tilted to follow the rim
+    sx_, sy_ = D["sensor_xy"]; tl = math.radians(D["sensor_tilt_deg"]); az = math.atan2(sy_, sx_)
+    seat = cyl("_seat", D["sensor_d"] / 2 + D["ring_w"] + 0.0002, 0.012, verts=64)
+    seat.rotation_euler = (0, tl, az); seat.location = (sx_, sy_, H - 0.0045 + 0.006 * 0)   # local z of shell = H at the rim
+    seat.location = Vector((sx_, sy_, H - 0.0045)) + Vector((0, 0, 0.006))
+    apply_xf(seat); cut(shell, seat)
     smooth(shell)
     return shell
-
-# ----------------------------------------------------------------------------------------
-# Printed part 2: thin mast tube + flange + curved hood (local z=0 is the flange bottom)
-# ----------------------------------------------------------------------------------------
-def build_mast():
-    ro = D["mast_od"] / 2; ri = ro - D["mast_wall"]; h = D["mast_h"]; ft = D["mast_flange_t"]
-    tube_h = D["head_z0"] + 0.004
-    mast = cyl("sensor_mast", ro, tube_h, verts=48)
-    union(mast, cyl("_fl", D["mast_flange_d"] / 2, ft, verts=64))
-    union(mast, cone("_fc", D["mast_flange_d"] / 2 - 0.004, ro, 0.010, z0=ft, verts=48))
-    cut(mast, cyl("_bore", ri, tube_h - 0.012 + 0.001, z0=-0.001, verts=48))
-    for a in range(4):
-        ang = math.pi / 4 + a * math.pi / 2
-        cut(mast, cyl("_sh", 0.0016, 0.02, x=0.0105 * math.cos(ang), y=0.0105 * math.sin(ang), z0=-0.005, verts=16))
-    # curved hood: arc strip bent forward (+X), solidified
-    R = D["hood_R"]; zt = h; t0, t1 = D["hood_t0"], D["hood_t1"]; hw = D["hood_w"] / 2
-    n = 18
-    bm = bmesh.new(); cols = []
-    for ys in (-hw, -hw / 2, 0, hw / 2, hw):
-        cols.append([bm.verts.new((R * math.sin(t0 + (t1 - t0) * i / n), ys, zt - R + R * math.cos(t0 + (t1 - t0) * i / n))) for i in range(n + 1)])
-    for a, b in zip(cols[:-1], cols[1:]):
-        for i in range(n): bm.faces.new((a[i], b[i], b[i + 1], a[i + 1]))
-    me = bpy.data.meshes.new("_hood"); bm.to_mesh(me); bm.free()
-    hood = bpy.data.objects.new("_hood", me); bpy.context.collection.objects.link(hood)
-    sm = hood.modifiers.new("sol", "SOLIDIFY"); sm.thickness = -D["hood_t"]; sm.offset = 1.0
-    active(hood); bpy.ops.object.modifier_apply(modifier=sm.name); recalc(hood)
-    # round the plate corners in plan view by intersecting with a rounded footprint
-    foot = box("_ft", 0.09, D["hood_w"], 0.08, z0=zt - 0.05); bevel(foot, 0.012, 5, 20)
-    boolean(hood, foot, "INTERSECT")
-    bevel(hood, 0.0008, 2, 35)
-    union(mast, hood)
-    union(mast, cyl("_boss", 0.0045, zt - 0.0015 - (tube_h - 0.002), z0=tube_h - 0.002, verts=32))
-    smooth(mast)
-    return mast
-
-def build_head():
-    """Dark light-sensor head (bought): ribbed short cylinder under the hood."""
-    z0, hh, r = D["head_z0"], D["head_h"], D["head_d"] / 2
-    parts_ = [cyl("_core", r - 0.0025, hh, z0=z0, verts=48)]
-    nrib = 4
-    for i in range(nrib):
-        z = z0 + 0.002 + i * (hh - 0.007) / (nrib - 1)
-        parts_.append(cyl("_rib", r, 0.0032, z0=z, verts=48))
-    hd = join("light_head", parts_); smooth(hd); return hd
 
 # ----------------------------------------------------------------------------------------
 # Printed part 3: dock ramp with backrest (local origin: low end centre on ground; x rises towards the backrest)
@@ -493,7 +447,7 @@ def build_tray():
 # Build + export printed parts (each at its local origin)
 # ----------------------------------------------------------------------------------------
 t0 = time.time()
-parts = {"shell_ring_cradle": build_shell(), "sensor_mast": build_mast(),
+parts = {"shell_ring_cradle": build_shell(),
          "dock_ramp": build_ramp(), "battery_tray": build_tray()}
 parts["shell_ring_cradle"].name = "shell_body"
 print("PARTS built t=%.1fs" % (time.time() - t0))
@@ -534,8 +488,15 @@ M = dict(
     brass=make_mat("Brass", srgb("#C79A3B"), 0.3, 1.0),
     cable=make_mat("Cable_black", srgb("#0C0C0D"), 0.45, 0.0, 0.5),
     led=make_mat("LED_warm", srgb("#FFD9A0"), 0.3, 0.0, 0.5, emit=srgb("#FFB35C"), emit_strength=18.0),
+    dome=make_mat("Sensor_dome_frosted", srgb("#E9EEF0"), 0.34, 0.0, 0.5),
+    chip=make_mat("Sensor_chip", srgb("#15181B"), 0.4, 0.0, 0.4),
     ground=make_mat("Ground", srgb("#605F5B"), 0.9, 0.0, 0.0),
 )
+try:
+    b_ = M["dome"].node_tree.nodes["Principled BSDF"]
+    for k in ("Transmission Weight", "Transmission"):
+        if k in b_.inputs: b_.inputs[k].default_value = 0.85; break
+except Exception as e: print("dome mat", e)
 M["leaf"] = leaf_material("Pothos_leaf", (0.030, 0.17, 0.035), (0.50, 0.58, 0.12))
 M["eye_face"] = mesh_face_material("Transducer_mesh")
 for o in parts.values(): assign(o, M["shell"])
@@ -683,7 +644,7 @@ for i in range(D["n_upright"]):
     a = 2 * math.pi * i / D["n_upright"] + random.uniform(-0.25, 0.25)
     out_ = Vector((math.cos(a), math.sin(a), 0))
     r0 = random.uniform(0.004, 0.022); h = random.uniform(0.060, 0.125); re = random.uniform(0.030, 0.062)
-    da = abs((a - math.atan2(D["mast_xy"][1], D["mast_xy"][0]) + math.pi) % (2 * math.pi) - math.pi)
+    da = abs((a - math.atan2(D["plant_gap_xy"][1], D["plant_gap_xy"][0]) + math.pi) % (2 * math.pi) - math.pi)
     if da < 0.9: re *= 0.35 + 0.65 * da / 0.9
     P0 = centre + out_ * r0
     P1 = P0 + Vector((0, 0, h * 0.75)) + out_ * (re * 0.35)
@@ -732,9 +693,35 @@ for j in range(D["n_trail"]):
         leaf_on(p + radial * 0.002, tip, nh, random.uniform(0.7, 1.0) * (0.9 if fr > 0.5 else 1.0), petiole=0.014)
 bought += plant
 
-# ---- mast ----
-mast = parts["sensor_mast"]; mx, my = D["mast_xy"]; mast.location = (mx, my, SHELL_TOP_W)
-head = build_head(); head.location = (mx, my, SHELL_TOP_W); assign(head, M["dark"]); bought.append(head)
+# ---- light sensor: frosted dome in a thin white ring, flush in the rear rim ----
+def build_sensor():
+    sx_, sy_ = D["sensor_xy"]; tl = math.radians(D["sensor_tilt_deg"]); az = math.atan2(sy_, sx_)
+    r = D["sensor_d"] / 2; rw = D["ring_w"]; rh = D["ring_h"]
+    base = Vector((sx_, sy_, SHELL_TOP_W))
+    rot = (0, tl, az)
+    n = Vector((0, 0, 1)); n.rotate(__import__("mathutils").Euler(rot, "XYZ"))
+    # ring: top stands 0.4 mm proud of the rim, body sunk into the seat
+    ring = cyl("sensor_ring", r + rw, rh + 0.002, verts=64)
+    bevel(ring, 0.0005, 2, 40); smooth(ring)
+    ring.rotation_euler = rot; ring.location = base + n * (0.0004 - (rh + 0.002))
+    assign(ring, M["shell"])
+    top = base + n * 0.0004
+    # dome: squashed half sphere, r 11 mm, 8 mm tall
+    bm = bmesh.new(); res = bmesh.ops.create_uvsphere(bm, u_segments=48, v_segments=24, radius=r)
+    for v in res["verts"]: v.co.z *= D["dome_h"] / r
+    bmesh.ops.bisect_plane(bm, geom=list(bm.verts) + list(bm.edges) + list(bm.faces), plane_co=(0, 0, 0), plane_no=(0, 0, 1), clear_inner=True)
+    me = bpy.data.meshes.new("m_sdome"); bm.to_mesh(me); bm.free()
+    dome = bpy.data.objects.new("sensor_dome", me); bpy.context.collection.objects.link(dome)
+    dome.rotation_euler = rot; dome.location = top
+    for pl in me.polygons: pl.use_smooth = True
+    me.materials.append(M["dome"])
+    # dark sensor chip just under the dome
+    chip = cyl("sensor_chip", r * 0.55, 0.0008, verts=32)
+    chip.rotation_euler = rot; chip.location = top + n * 0.0003
+    assign(chip, M["chip"])
+    return [ring, dome, chip]
+sensor_objs = build_sensor()
+bought += sensor_objs
 
 # ---- dock ramp (printed) + bought contacts, LED, cable, all parented to the ramp ----
 ramp = parts["dock_ramp"]
@@ -761,7 +748,7 @@ bought += dock_extras   # hidden in the exploded view
 
 # ---- parent the robot to one root so scenes can pose it ----
 bpy.ops.object.empty_add(type="PLAIN_AXES", location=(0, 0, 0)); root = bpy.context.active_object; root.name = "robot_root"
-robot_objs = [shell, mast, tray] + [o for o in bought if o not in dock_extras]
+robot_objs = [shell, tray] + [o for o in bought if o not in dock_extras]
 for o in robot_objs: o.parent = root
 root_children = robot_objs
 
@@ -1047,14 +1034,13 @@ if DO_RENDER:
         shell.location = (0.0, 0.0, 0.0)
         ramp.rotation_euler = (0, 0, 0); ramp.location = (-0.05, -0.33, 0.0)
         tray.location = (0.30, -0.14, 0.0)
-        mast.location = (0.30, 0.10, 0.0)
         cam.data.lens = 50
         aim((0.80, -0.92, 0.52), (0.13, -0.06, 0.07))
         do_render(os.path.join(RENDER, "parts-exploded.png"), D["asm_res"], -0.4)
 
 # save the blend last, in the assembly pose
 pose_robot(); ramp.rotation_euler = (0, 0, math.pi); ramp.location = (-0.30, 0.04, 0)
-shell.location = (0, 0, D["shell_z0"]); tray.location = (0, D["battery_y"], top); mast.location = (mx, my, SHELL_TOP_W)
+shell.location = (0, 0, D["shell_z0"]); tray.location = (0, D["battery_y"], top)
 for o in bought + [ramp]: o.hide_render = False
 set_visible("assembly")
 bpy.ops.wm.save_as_mainfile(filepath=os.path.join(BLEND, "robot-planter.blend"))

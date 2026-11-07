@@ -20,3 +20,7 @@ Starting from the first frame, a plant pot in a smooth matte white shell on a lo
 - Billed 130,500 tokens (~$0.91 at the 2.0 rate, estimate).
 - Same seam pattern as v1: at ~3.1 s the robot jumps back left and larger, then rolls right again. 0 to 3.0 s is clean; the object holds its shape (shell, eyes, hooded mast, pot) throughout.
 - Used: 0 to 3.0 s, cropped 4:3 (x offset 320) as the card hover clip.
+
+## v3 (2026-11-07): no mast
+- First frame: render/hero.png (v3, Blender render without the mast, made photographic). Prompt: prompt-v3.txt. 6 s, 720p.
+- Same seam at ~3.1 s; 0 to 3.0 s used, cropped 4:3 (x offset 180), no mast in any frame.

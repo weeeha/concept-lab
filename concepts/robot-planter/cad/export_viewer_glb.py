@@ -20,12 +20,15 @@ def flat(name, rgb, rough=0.6):
 leaf = flat("viewer_leaf", (0.10, 0.32, 0.07), 0.45)
 stem = flat("viewer_stem", (0.22, 0.42, 0.12))
 eye = flat("viewer_eye", (0.03, 0.03, 0.03), 0.8)
+dome = flat("viewer_dome", (0.87, 0.89, 0.90), 0.4)
+chip = flat("viewer_chip", (0.08, 0.09, 0.10), 0.5)
 for n in names:
     o = bpy.data.objects[n]
     k = o.name.lower()
-    m = leaf if k.startswith("leaf") else stem if k.startswith(("petiole", "stem")) else eye if k.startswith("eye_face") else None
+    m = leaf if k.startswith("leaf") else stem if k.startswith(("petiole", "stem")) else eye if k.startswith("eye_face") else dome if k.startswith("sensor_dome") else chip if k.startswith("sensor_chip") else None
     if m:
         o.data.materials.clear(); o.data.materials.append(m)
+assert not any("mast" in n.lower() or "light_head" in n.lower() for n in names), "mast object in export"
 print("EXPORT", len(names), sorted(names))
 bpy.ops.export_scene.gltf(filepath=os.path.join(here, "robot-planter-viewer.glb"), use_selection=True,
                           export_apply=True, export_format="GLB", export_yup=True)

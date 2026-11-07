@@ -35,6 +35,6 @@ of the $477 is from fetched pages; battery, charger and pot are snippet prices.
 | Part | Fits around | Material | Est. print time |
 |---|---|---|---|
 | Shell ring + cradle | Dagu footprint, 15 cm pot | PETG | ~9 h |
-| Sensor mast with rain hood | HC-SR04, light sensor | PETG | ~2 h |
+| Light-sensor dome ring | DFRobot light sensor, clear cap | PETG | ~1 h |
 | Dock ramp with contact holders | chassis wheelbase | PETG | ~5 h |
 | Battery tray | 3S 5000 mAh pack (~155 x 48 x 40 mm) | PETG | ~2 h |

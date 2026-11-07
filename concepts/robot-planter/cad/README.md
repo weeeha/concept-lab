@@ -3,18 +3,17 @@
 > **Concept.** Planned design, nothing printed or built. Geometry is generated from
 > `build_robot_planter.py`; fit against the real Dagu chassis, Pi and battery is unchecked.
 
-Four printed parts, all PETG. Sizes are as exported (STL in millimetres, z = 0 on the bed).
+Three printed parts, all PETG. Sizes are as exported (STL in millimetres, z = 0 on the bed).
 Dimensions live in the `D = dict(...)` block at the top of the script. Front of the robot (the sensor
 eyes) faces +X in Blender; in the GLB it also faces +X (glTF is Y-up, so Blender +Y becomes glTF -Z).
 
 | Part | STL | Size (mm, x y z) | What it does | Est. print (parts.md) |
 |---|---|---|---|---|
-| Shell (one body) | `shell-ring-cradle.stl` (name kept so links do not break) | 248 x 248 x 105 | Low tapered tub, 250 mm at the skirt, 225 mm at the flat top rim, 105 mm tall, soft fillets top and bottom, 3.5 mm walls, 12 mm lid. A 60 mm deep tapered pocket holds the 15 cm pot (1.5 mm clearance) so about 70 mm of the pot shows. Four small wheel arches, 10 mm ground gap, drain hole, shallow rounded recess in the front face for the two 16 mm ultrasonic transducers (26 mm apart), mast cable hole and four screw holes. | ~9 h |
-| Sensor mast + hood | `sensor-mast.stl` | 53 x 50 x 202 | 16 mm OD tube, 28 mm flange, 200 mm tall above the rim, centre rod up through the dark light-sensor head (bought, ribbed) into a curved hood, 50 mm wide, bent forward. No cone. | ~2 h |
+| Shell (one body) | `shell-ring-cradle.stl` (name kept so links do not break) | 248 x 248 x 105 | Low tapered tub, 250 mm at the skirt, 225 mm at the flat top rim, 105 mm tall, soft fillets top and bottom, 3.5 mm walls, 12 mm lid. A 60 mm deep tapered pocket holds the 15 cm pot (1.5 mm clearance) so about 70 mm of the pot shows. Four small wheel arches, 10 mm ground gap, drain hole, shallow rounded recess in the front face for the two 16 mm ultrasonic transducers (26 mm apart), a 24 mm round seat in the rear top rim for the light-sensor ring. | ~9 h |
 | Dock ramp | `dock-ramp.stl` | 120 x 230 x 90 | 25 mm rise wedge, rounded backrest 90 mm tall, two side wings, two 8 mm bores for the spring-contact posts, LED seat on top, cable exit. | ~5 h |
 | Battery tray | `battery-tray.stl` | 183 x 56 x 25 | Pocket for a 155 x 48 x 40 mm pack (+1 mm clearance each side), 3 mm walls 22 mm high, two strap slots with underside channels, two finger scoops, two M3 ears. | ~2 h |
 
-Not printed, modelled for the renders: terracotta pot, procedural pothos (heart-shaped leaf meshes on curved stems,
+Not printed, modelled for the renders: light sensor (22 mm frosted dome, 8 mm tall, in a thin white ring flush in the rear rim, tilted 4 degrees; replaces the old sensor mast), terracotta pot, procedural pothos (heart-shaped leaf meshes on curved stems,
 some trailing over the rim), two spring-contact posts with brass coils, dome LED, dock cable, chassis, Pi and battery stand-ins.
 
 ## Known fit issues, read before printing
@@ -31,7 +30,7 @@ some trailing over the rim), two spring-contact posts with brass coils, dome LED
 
 ## Files
 
-- `build_robot_planter.py`: builds the four parts, exports STLs, builds the assembly, saves the blend and GLB, renders the
+- `build_robot_planter.py`: builds the three parts, exports STLs, builds the assembly, saves the blend and GLB, renders the
   assembly, exploded view and four photo-shot scenes.
 - `../blender/robot-planter.blend`, `../blender/robot-planter.glb` (robot and ramp, no Draco; procedural leaf and transducer
   materials fall back to flat colours in the GLB).

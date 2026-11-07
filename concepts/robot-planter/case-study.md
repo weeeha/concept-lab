@@ -37,7 +37,7 @@ a 3S 5000 mAh pack with a balance charger, capacitive moisture, ambient light an
 sensors, a 15 cm plastic pot. About $477 CAD at today's prices, parts list in the repo.
 
 Printed in PETG: a shell ring with a pot cradle that hides the chassis and lets the wheels
-peek out, a sensor mast with a rain hood, the dock ramp with contact holders, a battery tray.
+peek out, a clear dome for the light sensor, the dock ramp with contact holders, a battery tray.
 About 18 hours of printing.
 
 Written: `brain/` (scheduler, geofence, docking), `firmware/` (motors, sensors, power),
@@ -46,8 +46,8 @@ one config file, a main loop that logs every decision to `log.jsonl`.
 ## The printed parts
 
 The shell is the whole look. It is a 240 mm ring that drops over the chassis and carries the
-pot in a tapered cradle, so from a metre away it reads as a slightly tall white pot. The mast
-grows out of the ring beside the pot and carries the light sensor under a small hood. The ramp
+pot in a tapered cradle, so from a metre away it reads as a slightly tall white pot. The light
+sensor sits under a small clear dome in the rim behind the pot, so nothing sticks up. The ramp
 is the only part that lives apart from the robot.
 
 ## Seeing it
@@ -63,7 +63,7 @@ Assembly viewer: the Blender model, drag to turn it.
 | 2 | Pi drives the motors from a script, encoders count, ultrasonic stops it. | Rolls 2 m on the floor and stops at a shoe |
 | 3 | Scheduler with rules and a geofence, runs for a day on the balcony with a log. | Log shows one sun move and one home move |
 | 4 | Dock: ramp, contacts, beacon. Pot finds it from 1 m. | Three docks out of three, battery rising in the log |
-| 5 | Full shell and mast, real pot and plant, two weeks outside. | Plant alive, pot inside the fence, a real video of a night wander |
+| 5 | Full shell and dome, real pot and plant, two weeks outside. | Plant alive, pot inside the fence, a real video of a night wander |
 
 ## What I would learn
 
