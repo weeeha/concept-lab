@@ -1,7 +1,7 @@
 {
   "name": "concept-lab",
-  "description": "Pretend it's built: idea in, concept page out. Brief with real parts, scaffold repo, a Blender model that every photo is rendered from, a Seedance clip, and a page under Concepts on vyhouski.com. Ships a hook that keeps photos Blender-first and commits clean.",
-  "version": "0.3.0",
+  "description": "Two skills for showing work on vyhouski.com. concept: an idea that is not built yet becomes a page from a Blender model, render-to-photo stills and a Seedance clip. showcase: a prototype that exists gets its PRs merged, real screenshots, a README and a draft page. Ships a hook that keeps concept photos Blender-first and commits clean.",
+  "version": "0.4.0",
   "author": {
     "name": "Nick Vyhouski",
     "email": "mvyhouski@gmail.com"
