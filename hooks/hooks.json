@@ -1,0 +1,17 @@
+{
+  "description": "Concept Lab guards: every concept still starts from a Blender render (codex-image needs -r), and no commit sweeps in another repo or a huge file.",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/hooks/concept_guard.py\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

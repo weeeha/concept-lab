@@ -1,10 +1,17 @@
 {
   "name": "concept-lab",
-  "description": "Pretend it's built: turn a raw project idea into a concept piece (brief, plausible repo, 3D model, stills, video, vibefolio case study), labeled as a concept, never as shipped work.",
-  "version": "0.2.0",
+  "description": "Pretend it's built: idea in, concept page out. Brief with real parts, scaffold repo, a Blender model that every photo is rendered from, a Seedance clip, and a page under Concepts on vyhouski.com. Ships a hook that keeps photos Blender-first and commits clean.",
+  "version": "0.3.0",
   "author": {
     "name": "Nick Vyhouski",
     "email": "mvyhouski@gmail.com"
   },
-  "keywords": ["concept", "vibefolio", "case-study", "portfolio", "3d-printing", "seedance"]
+  "keywords": [
+    "concept",
+    "vibefolio",
+    "case-study",
+    "portfolio",
+    "3d-printing",
+    "seedance"
+  ]
 }
