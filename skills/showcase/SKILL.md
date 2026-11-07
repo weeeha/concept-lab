@@ -23,14 +23,18 @@ in the first line: repo, local path, GitHub account, and whether it has a live U
 2. **Nothing invented.** Every claim on the README and the page traces to the code, the running
    app or Nick. What is stubbed, sample data or unverified is said once, in `currentState` and
    the README's Status section. No users, metrics or clients.
-3. **Captures are real.** Screenshots and clips come from the app running (locally or its live
+3. **Sensitive subjects stay out of generated images.** When a project depicts real events
+   with victims or identifiable private people, generated or photoreal versions of those never
+   go on the page; pick neutral examples and say in the evidence row how they were chosen.
+   (Photo Recreations: American Gothic, a 1942 portrait of a real woman, was left out.)
+4. **Captures are real.** Screenshots and clips come from the app running (locally or its live
    URL). A hero "in context" image (the app on a laptop on a desk, the game on a phone) may be
    made with `codex-image -r <real screenshot>`, and its caption says it is a mockup of the real
    screen. No generated interface.
-4. **One gate, after the audit.** Stage 1 ends with what will be merged, captured and published,
+5. **One gate, after the audit.** Stage 1 ends with what will be merged, captured and published,
    and asks go. Merges that deploy and the portfolio merge each need Nick's yes (auto mode
    blocks them anyway); ask once per list, not per PR.
-5. **Branch per change, never push to main.** README work on `docs/showcase`, portfolio work
+6. **Branch per change, never push to main.** README work on `docs/showcase`, portfolio work
    in a worktree off `origin/main`.
 
 ## Pipeline
@@ -47,6 +51,9 @@ about how long.
   main and uncommitted trees (`me:stranded --fetch` from inside the repo). A PR with red checks
   or a red-phase test is reported, not merged (the `me:stranded` rescue rules apply).
 - How to run it: `package.json` scripts, `.claude/launch.json`, a Makefile, the `run` skill.
+  Look in `tools/` for a capture script first: Photo Recreations had `tools/shot.mjs` (waits for
+  the scene to be ready, WebKit renders in seconds where software Chromium takes ~45 s). Use the
+  project's own tool over a new one.
   Try it. If it does not start, that is the first finding: fix only if trivial, otherwise say
   so and plan captures from the live URL or stop.
 - What it does, from the code and a short session using it: the three or four moments worth a
@@ -82,7 +89,14 @@ Start it from `main` after the merges, on its own port (`.claude/launch.json` wi
   captioned as a render.
 
 Look at every capture before using it: a spinner, an error toast or a half-loaded state is a
-retake, not a picture.
+retake, not a picture. Any loop or glob in the capture commands goes in a bash script
+(`bash file.sh`): in zsh, `set -- $s` does not split and an empty glob aborts the chain, and both
+broke captures in the first run.
+
+A clip of a 3D or canvas app: drive it with the project's playwright (WebKit), take one
+screenshot per mouse step into a frame folder, then
+`ffmpeg -framerate 24 -i f%03d.png -c:v libx264 -crf 22 -pix_fmt yuv420p orbit.mp4`. 132 frames
+gave a smooth 5.5 s orbit.
 
 ### Stage 4: README
 
@@ -138,8 +152,11 @@ checksum check). Differences:
   `decisions` that came from the code, `hoverVideo` from the clip, `links` to the repo and live
   URL (public repos only, listed in `docs/vibefolio-visual-audit-2026-11-01.tsv`), and an
   honest `currentState`.
+- **Limits (a test enforces them):** a short page has at most 3 decisions, at most 2 of them
+  with a `screen`, at most 2 diagrams, and every image needs alt and caption. A `loop` (the
+  capture clip, 16:9) shows on the page; `hoverVideo` (4:3 crop) on the card.
 - **Evidence:** add a row to `docs/vibefolio-evidence.md`: source inspected, which captures are
-  fresh, what is sample data.
+  fresh, what is sample data, how generated examples were chosen.
 
 ## Closing message
 

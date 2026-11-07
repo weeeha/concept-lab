@@ -17,6 +17,8 @@ before the build exists.
 | Robot Planter | A plant pot on wheels that finds the sun and wanders the yard at night | [live](https://vyhouski.com/projects/robot-planter) | [weeeha/robot-planter](https://github.com/weeeha/robot-planter) |
 | Walking Planter | The same idea on a Waveshare HexArth hexapod: sits all day, walks to follow the sun | [live](https://vyhouski.com/projects/walking-planter) | weeeha/walking-planter (private) |
 
+Showcased with `showcase`: Photo Recreations (weeeha/photo-recreations, draft page).
+
 ## How a concept gets made
 
 One command in Claude Code, with the idea in any shape (a voice dump, a product link, a
