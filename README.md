@@ -34,3 +34,4 @@ Restart Claude Code after installing or updating.
 | Slug | Idea | Status |
 |---|---|---|
 | `robot-planter` | A plant pot on wheels that walks at night and finds the sun | Live: https://vyhouski.com/projects/robot-planter |
+| `walking-planter` | A plant pot on a hexapod that sits all day and walks to follow the sun | Page PR open; repo private |
