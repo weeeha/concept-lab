@@ -42,6 +42,27 @@ viewer is its GLB. The first run generated photos from text and got four differe
 The full pipeline, with every lesson from the first runs, is in
 [`skills/concept/SKILL.md`](skills/concept/SKILL.md).
 
+## Showcase: for prototypes that already exist
+
+Quick creative builds pile up with open PRs, a template README and no screenshots. One command
+takes a project from "works on my machine" to a page:
+
+```
+/concept-lab:showcase ~/ClaudeCode Projects/<project>
+```
+
+| Stage | What happens |
+|---|---|
+| 1. Audit | Open PRs and their checks, unpushed work, how to run it, what is worth showing. **Stops here for a go.** |
+| 2. Merge | Approved PRs merged after green checks, confirmed on main |
+| 3. Capture | Runs the app from main and takes real screenshots and a short screen clip in the Browser pane |
+| 4. README | What it does, a screenshot at the top, commands that worked, an honest Status section |
+| 5. Hero (optional) | The real screenshot placed on a device in a setting, captioned as a mockup |
+| 6. Page | A draft entry under "More from GitHub" on the site, with captures, a diagram and the clip |
+
+The difference from `concept`: the project exists, so every picture is a real capture of it
+running. Details in [`skills/showcase/SKILL.md`](skills/showcase/SKILL.md).
+
 ## What is in this repo
 
 | Path | What |
