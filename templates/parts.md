@@ -1,4 +1,4 @@
-# Parts (concept)
+# Parts
 
 Prices are approximate CAD at the time of writing, looked up, not guessed. Links go to the
 vendor page used for the price.

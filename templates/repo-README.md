@@ -1,5 +1,3 @@
-> **Concept.** Planned build, code untested. Case study: <page url>
-
 # <Title>
 
 <Pitch, two lines.>
@@ -21,4 +19,4 @@
 
 ## Status
 
-Scaffold only. Nothing in this repo has run on hardware. The build plan is in the case study.
+Planned build; the code has not run on hardware yet. Plan and visuals: <page url>
