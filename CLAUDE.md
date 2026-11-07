@@ -2,7 +2,7 @@
 
 Idea in, concept piece out. A concept piece is a case study for something Nick plans to build
 but has not built yet: a brief, a repo with plausible untested code, a 3D model, stills, a short
-video and a vibefolio page. Nick's global rules apply (`~/.claude/CLAUDE.md`).
+video and a page under Concepts on vyhouski.com/projects. Nick's global rules apply (`~/.claude/CLAUDE.md`).
 
 ## The one rule that matters
 
@@ -18,14 +18,17 @@ evidence, not promoted in place.
 - `templates/`: skeletons the pipeline fills. Change the template, not the skill, to change the shape.
 - `concepts/<slug>/`: one folder per concept (brief, parts, 3D sources, picked renders, video, case-study draft).
   Raw generation output stays out of git (`.gitignore`).
-- Published targets live elsewhere: code repo `weeeha/<slug>` (GitHub), page `/vibefolio/<slug>`
+- Published targets live elsewhere: code repo `weeeha/<slug>` (GitHub), page `/projects/<slug>`
   in `~/ClaudeCode Projects/Design Portfolio Site`.
 
 ## Working here
 
-- Branch per concept: `concept/<slug>`. Never push to `main`.
+- Branch per concept: `concept/<slug>`. Never push to `main`. Stage `concepts/<slug>/` by path,
+  never `git add -A` at the root (the hook blocks nested repos and files over 25 MB).
 - Paid generation (Seedance video) only after Nick approved the brief. Codex images are free on his plan.
-- Tools come from the inventory: `codex-image` for stills, `seedance-prompt` for video,
-  `parametric-3d-printing` + FreeCAD MCP for printable parts, Blender MCP for the assembly render and GLB.
+- The Blender model is the only source of what the object looks like: Blender headless for the
+  model, shot renders and GLB; `codex-image -r <render>` for photos (the hook blocks it without
+  `-r`); Seedance from the hero photo for the clip. Details in `skills/concept/SKILL.md`.
+- No stray protrusions: sensors flush or under a dome unless the brief says why not.
 - Prose a client could read follows `~/.claude/packs/modules/writing-full.md`: no em dashes, no
   exclamation marks, TL;DR first, Nick hand-edits before it goes live.

@@ -1,6 +1,6 @@
 # <Title>: concept case study
 
-**Page:** `/vibefolio/<slug>`, badge **Concept**.
+**Page:** `/projects/<slug>`, under Concepts, status "Concept, not built".
 **Written:** <date>, drafted by Claude from `concepts/<slug>/brief.md`. Nick hand-edits before it goes live.
 **Assets:** `public/vibefolio/<slug>/` (hero still, two more stills, printed-part render, `model.glb`, `clip.mp4`).
 **Code:** https://github.com/weeeha/<slug> (scaffold, untested).

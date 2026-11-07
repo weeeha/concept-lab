@@ -1,7 +1,7 @@
 # <Title>
 
 **Status:** concept, not built. Written <date> from Nick's idea dump.
-**Slug:** `<slug>` · **Repo:** weeeha/<slug> (stage 2) · **Page:** /vibefolio/<slug> (stage 6)
+**Slug:** `<slug>` · **Repo:** weeeha/<slug> (stage 2) · **Page:** /projects/<slug> (stage 6)
 
 ## Pitch
 
