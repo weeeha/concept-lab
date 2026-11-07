@@ -33,4 +33,4 @@ Restart Claude Code after installing or updating.
 
 | Slug | Idea | Status |
 |---|---|---|
-| (none yet) | | |
+| `third-person-vr` | A camera on a backpack pole streamed to a Quest 3: see yourself from behind, like in a game | Page PR open (draft); repo private |
