@@ -1,0 +1,5 @@
+audit: PASS (0 errors, 0 warnings)
+  size 0.4314 x 0.3955 x 0.3449 m
+  8718 lines, 2310 triangles, 0 points, 0 moving copies
+  evidence-backed key parts: 0 of 14
+  designed parts: 2 to a requirement (req.carapace, req.payload), 0 designed freely

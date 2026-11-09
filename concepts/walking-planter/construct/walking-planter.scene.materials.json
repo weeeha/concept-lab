@@ -1,0 +1,14 @@
+{"materials": [
+  {"parts": ["light-sensor-dome", "oled-window"], "name": "clear dome", "color": "#dfe8ee", "finish": "glass"},
+  {"parts": "belly-contact", "name": "brass contact", "color": "#b8913a", "finish": "brushed"},
+  {"parts": ["carapace", "carapace-skirt"], "name": "PETG cream", "color": "#efe6d2", "finish": "plastic"},
+  {"parts": "grower-pot", "name": "terracotta plastic", "color": "#c8643a", "finish": "plastic"},
+  {"parts": "soil", "name": "LECA mix", "color": "#5a4636", "finish": "rubber"},
+  {"parts": "pothos-leaf-*", "name": "pothos leaf", "color": "#3f8a2e", "finish": "plastic", "roughness": 0.4},
+  {"parts": "pothos-stem-*", "name": "pothos stem", "color": "#6aa84f", "finish": "plastic"},
+  {"parts": "foot-tip-*", "name": "rubber tip", "color": "#1b1b1c", "finish": "rubber"},
+  {"parts": "foot-tube-*", "name": "carbon tube", "color": "#3a3a3d", "finish": "brushed", "roughness": 0.35},
+  {"parts": "standoff", "name": "brass standoff", "color": "#c9a24a", "finish": "brushed"},
+  {"parts": "pi-5", "name": "Pi board", "color": "#2f6b3a", "finish": "plastic"},
+  {"parts": "*", "name": "black servo plastic", "color": "#151517", "finish": "plastic"}
+]}

@@ -1,0 +1,5 @@
+audit: PASS (0 errors, 1 warnings)
+  warn [tiny] nozzle is 1.5% of the object's size: it may vanish at the hero framing.
+  size 0.389 x 0.4938 x 0.491 m
+  1208 lines, 326 triangles, 0 points, 0 moving copies
+  evidence-backed key parts: 0 of 8

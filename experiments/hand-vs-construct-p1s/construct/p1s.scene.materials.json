@@ -1,0 +1,14 @@
+{"materials": [
+  {"parts": ["side-glass", "door-glass", "lid-glass"], "name": "glass", "color": "#d9e6eb", "finish": "glass"},
+  {"parts": "screen", "name": "screen", "color": "#03050a", "finish": "glass"},
+  {"parts": "button", "name": "button", "color": "#808085", "finish": "plastic"},
+  {"parts": "bed-plate", "name": "PEI plate", "color": "#8c7340", "finish": "brushed"},
+  {"parts": ["y-rail", "x-rail", "z-screw"], "name": "rail steel", "color": "#b4b4b8", "finish": "chrome"},
+  {"parts": "toolhead", "name": "toolhead", "color": "#cccccc", "finish": "plastic"},
+  {"parts": "nozzle", "name": "nozzle brass", "color": "#c08c33", "finish": "brushed"},
+  {"parts": "foot", "name": "rubber", "color": "#050505", "finish": "rubber"},
+  {"parts": "spool", "name": "filament orange", "color": "#e65a0d", "finish": "plastic"},
+  {"parts": "ptfe-tube", "name": "PTFE", "color": "#f2f2f2", "finish": "plastic"},
+  {"parts": "base", "name": "base grey", "color": "#101012", "finish": "plastic"},
+  {"parts": "*", "name": "frame dark grey", "color": "#08080a", "finish": "plastic"}
+]}
