@@ -1,0 +1,811 @@
+{
+ "format": "construct-scene",
+ "version": 2,
+ "id": "bambu-p1s",
+ "title": "Bambu Lab P1S",
+ "subject": {
+  "category": "machine",
+  "accuracy": "approximate",
+  "synthetic": false,
+  "summary": "An enclosed CoreXY 3D printer. Outer size and build volume from retailer listings; every other size estimated from general knowledge of the machine."
+ },
+ "units": "m",
+ "seed": 3,
+ "sources": [
+  {
+   "id": "request",
+   "kind": "user_request",
+   "title": "Shared brief (experiments/hand-vs-construct-p1s/BRIEF.md)",
+   "rights": "user_private"
+  },
+  {
+   "id": "listing-dims",
+   "kind": "document",
+   "title": "Cartridge World AU and MatterHackers P1S listings",
+   "rights": "reference_only"
+  },
+  {
+   "id": "listing-build",
+   "kind": "document",
+   "title": "Makerpoint and printer-hub.ru P1S listings",
+   "rights": "reference_only"
+  }
+ ],
+ "facts": [
+  {
+   "key": "size.outer",
+   "value": "389 x 389 x 458 mm",
+   "certainty": "verified",
+   "source": "listing-dims"
+  },
+  {
+   "key": "build.volume",
+   "value": "256 x 256 x 256 mm",
+   "certainty": "verified",
+   "source": "listing-build"
+  },
+  {
+   "key": "weight",
+   "value": 12.95,
+   "unit": "kg",
+   "certainty": "verified",
+   "source": "listing-dims"
+  },
+  {
+   "key": "estimate",
+   "value": "post, rim, base, bed and gantry sizes estimated",
+   "certainty": "inferred",
+   "source": "request"
+  }
+ ],
+ "assets": [],
+ "parts": [
+  {
+   "id": "foot",
+   "label": "Foot",
+   "role": "structure",
+   "certainty": "inferred",
+   "stage": 0,
+   "basis": [
+    "estimate"
+   ],
+   "shape": {
+    "type": "cylinder",
+    "radius": 0.016,
+    "height": 0.01,
+    "segments": 24
+   },
+   "at": [
+    0.1595,
+    0,
+    0.1595
+   ],
+   "mirror": "x",
+   "repeat": {
+    "count": 2,
+    "step": {
+     "at": [
+      0,
+      0,
+      -0.319
+     ]
+    }
+   }
+  },
+  {
+   "id": "base",
+   "label": "Base (electronics, PSU)",
+   "role": "mass",
+   "certainty": {
+    "size": "verified",
+    "shape": "inferred"
+   },
+   "stage": 0,
+   "basis": [
+    "size.outer"
+   ],
+   "shape": {
+    "type": "box",
+    "size": [
+     0.389,
+     0.08,
+     0.389
+    ],
+    "anchor": "base"
+   },
+   "at": [
+    0,
+    0.01,
+    0
+   ],
+   "source": "listing-dims"
+  },
+  {
+   "id": "screen",
+   "label": "Front screen",
+   "role": "identity",
+   "certainty": "inferred",
+   "stage": 1,
+   "basis": [
+    "estimate"
+   ],
+   "shape": {
+    "type": "plane",
+    "size": [
+     0.062,
+     0.034
+    ]
+   },
+   "at": [
+    -0.1195,
+    0.052,
+    0.195
+   ],
+   "look": {
+    "fill": "dark"
+   }
+  },
+  {
+   "id": "button",
+   "label": "Button",
+   "role": "detail",
+   "certainty": "inferred",
+   "stage": 1,
+   "basis": [
+    "estimate"
+   ],
+   "shape": {
+    "type": "cylinder",
+    "radius": 0.0045,
+    "height": 0.003,
+    "segments": 16
+   },
+   "at": [
+    -0.0695,
+    0.052,
+    0.1945
+   ],
+   "rotate": [
+    90,
+    0,
+    0
+   ],
+   "repeat": {
+    "count": 5,
+    "step": {
+     "at": [
+      0.013,
+      0,
+      0
+     ]
+    }
+   }
+  },
+  {
+   "id": "post",
+   "label": "Corner post",
+   "role": "mass",
+   "certainty": "inferred",
+   "stage": 1,
+   "basis": [
+    "size.outer"
+   ],
+   "shape": {
+    "type": "box",
+    "size": [
+     0.022,
+     0.368,
+     0.022
+    ],
+    "anchor": "base"
+   },
+   "at": [
+    0.1835,
+    0.09,
+    0.1835
+   ],
+   "mirror": "x",
+   "repeat": {
+    "count": 2,
+    "step": {
+     "at": [
+      0,
+      0,
+      -0.367
+     ]
+    }
+   }
+  },
+  {
+   "id": "rim-front",
+   "label": "Top rim, front",
+   "role": "structure",
+   "certainty": "inferred",
+   "stage": 2,
+   "basis": [
+    "size.outer"
+   ],
+   "shape": {
+    "type": "box",
+    "size": [
+     0.345,
+     0.022,
+     0.022
+    ],
+    "anchor": "base"
+   },
+   "at": [
+    0,
+    0.436,
+    0.1835
+   ]
+  },
+  {
+   "id": "rim-back",
+   "label": "Top rim, back",
+   "role": "structure",
+   "certainty": "inferred",
+   "stage": 2,
+   "basis": [
+    "size.outer"
+   ],
+   "shape": {
+    "type": "box",
+    "size": [
+     0.345,
+     0.022,
+     0.022
+    ],
+    "anchor": "base"
+   },
+   "at": [
+    0,
+    0.436,
+    -0.1835
+   ]
+  },
+  {
+   "id": "rim-side",
+   "label": "Top rim, side",
+   "role": "structure",
+   "certainty": "inferred",
+   "stage": 2,
+   "basis": [
+    "size.outer"
+   ],
+   "shape": {
+    "type": "box",
+    "size": [
+     0.022,
+     0.022,
+     0.345
+    ],
+    "anchor": "base"
+   },
+   "at": [
+    0.1835,
+    0.436,
+    0
+   ],
+   "mirror": "x"
+  },
+  {
+   "id": "side-glass",
+   "label": "Side glass",
+   "role": "structure",
+   "certainty": "inferred",
+   "stage": 2,
+   "basis": [
+    "estimate"
+   ],
+   "shape": {
+    "type": "box",
+    "size": [
+     0.004,
+     0.346,
+     0.345
+    ],
+    "anchor": "base"
+   },
+   "at": [
+    0.1835,
+    0.09,
+    0
+   ],
+   "look": {
+    "fill": "glass"
+   },
+   "mirror": "x"
+  },
+  {
+   "id": "back-panel",
+   "label": "Back panel",
+   "role": "structure",
+   "certainty": "inferred",
+   "stage": 2,
+   "basis": [
+    "estimate"
+   ],
+   "shape": {
+    "type": "box",
+    "size": [
+     0.345,
+     0.346,
+     0.003
+    ],
+    "anchor": "base"
+   },
+   "at": [
+    0,
+    0.09,
+    -0.1915
+   ]
+  },
+  {
+   "id": "door-glass",
+   "label": "Front door glass",
+   "role": "identity",
+   "certainty": "inferred",
+   "stage": 3,
+   "basis": [
+    "estimate"
+   ],
+   "shape": {
+    "type": "box",
+    "size": [
+     0.355,
+     0.356,
+     0.004
+    ],
+    "anchor": "base"
+   },
+   "at": [
+    0.0,
+    0.085,
+    0.1975
+   ],
+   "look": {
+    "fill": "glass"
+   }
+  },
+  {
+   "id": "door-handle",
+   "label": "Door handle",
+   "role": "detail",
+   "certainty": "inferred",
+   "stage": 3,
+   "basis": [
+    "estimate"
+   ],
+   "shape": {
+    "type": "box",
+    "size": [
+     0.01,
+     0.12,
+     0.014
+    ],
+    "anchor": "base"
+   },
+   "at": [
+    0.1555,
+    0.203,
+    0.2065
+   ]
+  },
+  {
+   "id": "lid-glass",
+   "label": "Top lid glass",
+   "role": "identity",
+   "certainty": "inferred",
+   "stage": 3,
+   "basis": [
+    "estimate"
+   ],
+   "shape": {
+    "type": "box",
+    "size": [
+     0.351,
+     0.004,
+     0.351
+    ],
+    "anchor": "base"
+   },
+   "at": [
+    0,
+    0.458,
+    0
+   ],
+   "look": {
+    "fill": "glass"
+   }
+  },
+  {
+   "id": "z-screw",
+   "label": "Z lead screw",
+   "role": "structure",
+   "certainty": "inferred",
+   "stage": 2,
+   "basis": [
+    "estimate"
+   ],
+   "shape": {
+    "type": "cylinder",
+    "radius": 0.004,
+    "height": 0.336,
+    "segments": 12
+   },
+   "at": [
+    0.14,
+    0.09,
+    -0.15
+   ],
+   "mirror": "x"
+  },
+  {
+   "id": "bed-frame",
+   "label": "Bed rear crossbar",
+   "role": "structure",
+   "certainty": "inferred",
+   "stage": 3,
+   "basis": [
+    "estimate"
+   ],
+   "shape": {
+    "type": "box",
+    "size": [
+     0.286,
+     0.014,
+     0.024
+    ],
+    "anchor": "base"
+   },
+   "at": [
+    0,
+    0.246,
+    -0.138
+   ]
+  },
+  {
+   "id": "bed-arm",
+   "label": "Bed arm",
+   "role": "structure",
+   "certainty": "inferred",
+   "stage": 3,
+   "basis": [
+    "estimate"
+   ],
+   "shape": {
+    "type": "box",
+    "size": [
+     0.02,
+     0.01,
+     0.236
+    ],
+    "anchor": "base"
+   },
+   "at": [
+    0.12,
+    0.248,
+    -0.02
+   ],
+   "mirror": "x"
+  },
+  {
+   "id": "bed-plate",
+   "label": "Heated bed, 256 mm",
+   "role": "identity",
+   "certainty": {
+    "size": "verified",
+    "shape": "inferred"
+   },
+   "stage": 4,
+   "basis": [
+    "build.volume"
+   ],
+   "shape": {
+    "type": "box",
+    "size": [
+     0.266,
+     0.006,
+     0.266
+    ],
+    "anchor": "base"
+   },
+   "at": [
+    0,
+    0.26,
+    0.008
+   ],
+   "source": "listing-build"
+  },
+  {
+   "id": "y-rail",
+   "label": "Y rail",
+   "role": "structure",
+   "certainty": "inferred",
+   "stage": 5,
+   "basis": [
+    "estimate"
+   ],
+   "shape": {
+    "type": "box",
+    "size": [
+     0.014,
+     0.014,
+     0.345
+    ],
+    "anchor": "base"
+   },
+   "at": [
+    0.1655,
+    0.396,
+    0
+   ],
+   "mirror": "x"
+  },
+  {
+   "id": "x-rail",
+   "label": "X rail",
+   "role": "structure",
+   "certainty": "inferred",
+   "stage": 6,
+   "basis": [
+    "estimate"
+   ],
+   "shape": {
+    "type": "box",
+    "size": [
+     0.321,
+     0.018,
+     0.016
+    ],
+    "anchor": "base"
+   },
+   "at": [
+    0,
+    0.394,
+    0.03
+   ]
+  },
+  {
+   "id": "toolhead",
+   "label": "Toolhead",
+   "role": "identity",
+   "certainty": "inferred",
+   "stage": 7,
+   "basis": [
+    "estimate"
+   ],
+   "shape": {
+    "type": "box",
+    "size": [
+     0.058,
+     0.072,
+     0.052
+    ],
+    "anchor": "base"
+   },
+   "at": [
+    0.04,
+    0.344,
+    0.056
+   ]
+  },
+  {
+   "id": "toolhead-fan",
+   "label": "Part-cooling fan",
+   "role": "detail",
+   "certainty": "inferred",
+   "stage": 7,
+   "basis": [
+    "estimate"
+   ],
+   "shape": {
+    "type": "box",
+    "size": [
+     0.04,
+     0.04,
+     0.004
+    ],
+    "anchor": "base"
+   },
+   "at": [
+    0.04,
+    0.356,
+    0.084
+   ]
+  },
+  {
+   "id": "nozzle",
+   "label": "Nozzle",
+   "role": "data",
+   "certainty": "inferred",
+   "stage": 7,
+   "basis": [
+    "estimate"
+   ],
+   "shape": {
+    "type": "cone",
+    "radius_bottom": 0.0006,
+    "radius_top": 0.003,
+    "height": 0.008,
+    "segments": 12
+   },
+   "at": [
+    0.04,
+    0.336,
+    0.056
+   ]
+  },
+  {
+   "id": "spool-arm",
+   "label": "Spool holder arm",
+   "role": "structure",
+   "certainty": "inferred",
+   "stage": 3,
+   "basis": [
+    "estimate"
+   ],
+   "shape": {
+    "type": "cylinder",
+    "radius": 0.008,
+    "height": 0.08,
+    "segments": 16
+   },
+   "at": [
+    0.06,
+    0.3,
+    -0.1945
+   ],
+   "rotate": [
+    -90,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "spool",
+   "label": "Filament spool",
+   "role": "identity",
+   "certainty": "inferred",
+   "stage": 4,
+   "basis": [
+    "estimate"
+   ],
+   "shape": {
+    "type": "cylinder",
+    "radius": 0.1,
+    "height": 0.066,
+    "segments": 48,
+    "rings": 3
+   },
+   "at": [
+    0.06,
+    0.3,
+    -0.2115
+   ],
+   "rotate": [
+    -90,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "ptfe-tube",
+   "label": "PTFE tube",
+   "role": "detail",
+   "certainty": "inferred",
+   "stage": 5,
+   "basis": [
+    "estimate"
+   ],
+   "shape": {
+    "type": "tube",
+    "path": [
+     [
+      0.06,
+      0.4,
+      -0.2445
+     ],
+     [
+      0.06,
+      0.49,
+      -0.2345
+     ],
+     [
+      0.06,
+      0.46,
+      -0.1845
+     ]
+    ],
+    "radius": 0.002,
+    "sides": 8
+   },
+   "at": [
+    0,
+    0,
+    0
+   ]
+  }
+ ],
+ "articulations": [
+  {
+   "id": "door-open",
+   "type": "hinge",
+   "parts": [
+    "door-glass",
+    "door-handle"
+   ],
+   "axis": [
+    0,
+    -1,
+    0
+   ],
+   "pivot": [
+    -0.1775,
+    0.09,
+    0.1975
+   ],
+   "amount": 100,
+   "order": 0
+  },
+  {
+   "id": "lid-open",
+   "type": "hinge",
+   "parts": [
+    "lid-glass"
+   ],
+   "axis": [
+    -1,
+    0,
+    0
+   ],
+   "pivot": [
+    0,
+    0.458,
+    -0.1755
+   ],
+   "amount": 60,
+   "order": 1
+  }
+ ],
+ "presentation": {
+  "framing": {
+   "yaw": 30,
+   "pitch": 20
+  },
+  "views": [
+   {
+    "id": "open",
+    "label": "Door and lid open",
+    "yaw": 35,
+    "pitch": 25,
+    "distance": 1.1
+   }
+  ],
+  "atmosphere": {
+   "haze": 0.7,
+   "grid": true
+  },
+  "still_pose": "closed"
+ },
+ "animation": {
+  "assembly": {
+   "style": "build",
+   "seconds": 7.0,
+   "interference": true
+  },
+  "camera": {
+   "drift": 6,
+   "breathe": 0.03
+  }
+ },
+ "authoring": {
+  "tier": "standard",
+  "research": "done",
+  "sources": [
+   "listing-dims",
+   "listing-build"
+  ]
+ }
+}

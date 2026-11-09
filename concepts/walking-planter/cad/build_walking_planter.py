@@ -487,10 +487,10 @@ def build_body():
     put("pcb", mesh_box("m_pcb", 112, 78, 1.8, bev=0.4, seg=1), MT["pcb"], body, loc=(0, 0, 136.0))
     put("pi_board", mesh_box("m_pi", 86, 56, 16, bev=1.0), MT["black"], body, loc=(-4, 0, 145.0))
     put("top_plate", mesh_prism("m_top", oct_pts(76, 68, 22), 152.4, D["plate_top"]), MT["black"], body)
-    # front face: OLED window, button and LED (the HexArth side view shows them)
-    put("oled", mesh_box("m_oled", 1.2, 30, 12, bev=0.3, seg=1), MT["glass"], body, loc=(70.4, 0, 100.0))
-    put("btn", mesh_cyl("m_btn", 5.0, 3.0, "x", 24), MT["silver"], body, loc=(70.6, 22.0, 100.0))
-    put("btn2", mesh_cyl("m_btn2", 3.2, 3.0, "x", 24), MT["silver"], body, loc=(70.6, 22.0, 86.0))
+    # front face: OLED window, button and LED (the HexArth side view shows them), on the core's front face (x = 50)
+    put("oled", mesh_box("m_oled", 1.2, 30, 12, bev=0.3, seg=1), MT["glass"], body, loc=(50.6, 0, 100.0))
+    put("btn", mesh_cyl("m_btn", 5.0, 3.0, "x", 24), MT["silver"], body, loc=(51.5, 22.0, 100.0))
+    put("btn2", mesh_cyl("m_btn2", 3.2, 3.0, "x", 24), MT["silver"], body, loc=(51.5, 22.0, 86.0))
     # belly contacts (for the dock): two brass discs under the lower plate
     for s in (1, -1):
         put("belly_contact", mesh_cyl("m_bc", 5.5, 1.6, "z", 24), MT["brass"], body, loc=(0, s * D["contact_y"], bt - 0.8))

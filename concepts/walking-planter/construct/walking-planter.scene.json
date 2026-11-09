@@ -1,0 +1,2663 @@
+{
+ "format": "construct-scene",
+ "version": 2,
+ "id": "walking-planter",
+ "title": "Walking Planter",
+ "subject": {
+  "category": "machine",
+  "accuracy": "original",
+  "synthetic": false,
+  "summary": "A bought Waveshare HexArth hexapod carrying a printed carapace and a 12 cm pothos pot: it walks a few slow steps to follow the sun and sits the rest of the day. Robot sizes from Waveshare's drawing; carapace, pot cradle and sensor dome are a new design; the plant is decoration."
+ },
+ "units": "m",
+ "seed": 7,
+ "sources": [
+  {
+   "id": "request",
+   "kind": "user_request",
+   "title": "Nick's walking-planter idea and brief (concepts/walking-planter/brief.md)",
+   "rights": "user_private"
+  },
+  {
+   "id": "waveshare-drawing",
+   "kind": "drawing",
+   "title": "Waveshare HexArth dimension drawing, as transcribed in cad/build_walking_planter.py",
+   "rights": "reference_only",
+   "ref": "docs.waveshare.com/HexArth"
+  },
+  {
+   "id": "waveshare-page",
+   "kind": "document",
+   "title": "Waveshare HexArth product page",
+   "rights": "reference_only",
+   "ref": "https://www.waveshare.com/hexarth.htm"
+  },
+  {
+   "id": "parts-list",
+   "kind": "document",
+   "title": "Walking planter parts list, checked 2026-11-07 (concepts/walking-planter/parts.md)",
+   "rights": "user_private"
+  }
+ ],
+ "facts": [
+  {
+   "key": "hexarth.height",
+   "value": 0.15488,
+   "unit": "m",
+   "certainty": "verified",
+   "source": "waveshare-drawing",
+   "note": "standing height, top plate"
+  },
+  {
+   "key": "hexarth.length",
+   "value": 0.42859,
+   "unit": "m",
+   "certainty": "verified",
+   "source": "waveshare-drawing",
+   "note": "standing, foot to foot"
+  },
+  {
+   "key": "hexarth.width",
+   "value": 0.3443,
+   "unit": "m",
+   "certainty": "verified",
+   "source": "waveshare-drawing"
+  },
+  {
+   "key": "hexarth.body-bottom",
+   "value": 0.07368,
+   "unit": "m",
+   "certainty": "verified",
+   "source": "waveshare-drawing",
+   "note": "body line above ground, standing"
+  },
+  {
+   "key": "hexarth.top-plate",
+   "value": "152.01 x 136.41 mm",
+   "certainty": "verified",
+   "source": "waveshare-drawing"
+  },
+  {
+   "key": "hexarth.hips",
+   "value": "(+-53, +-48) front and rear, (0, +-78) middle, mm",
+   "certainty": "verified",
+   "source": "waveshare-drawing"
+  },
+  {
+   "key": "hexarth.servo-size",
+   "value": "45.2 x 24.7 x 37.3 mm",
+   "certainty": "verified",
+   "source": "waveshare-drawing"
+  },
+  {
+   "key": "hexarth.L1",
+   "value": 0.098,
+   "unit": "m",
+   "certainty": "inferred",
+   "source": "waveshare-drawing",
+   "note": "femur axis length, read off the drawing"
+  },
+  {
+   "key": "hexarth.L2",
+   "value": 0.1,
+   "unit": "m",
+   "certainty": "inferred",
+   "source": "waveshare-drawing",
+   "note": "knee to tip-sphere centre, read off the drawing"
+  },
+  {
+   "key": "hexarth.foot-tube",
+   "value": "about 20 mm carbon tube, rubber tip",
+   "certainty": "inferred",
+   "source": "waveshare-drawing"
+  },
+  {
+   "key": "hexarth.mass",
+   "value": 2.1,
+   "unit": "kg",
+   "certainty": "verified",
+   "source": "waveshare-page"
+  },
+  {
+   "key": "hexarth.payload",
+   "value": 1.0,
+   "unit": "kg",
+   "certainty": "verified",
+   "source": "waveshare-page",
+   "note": "dynamic"
+  },
+  {
+   "key": "hexarth.cells",
+   "value": "3s2p 18650, 10C or better (not included)",
+   "certainty": "verified",
+   "source": "waveshare-page"
+  },
+  {
+   "key": "hexarth.oled",
+   "value": "small OLED on the driver board",
+   "certainty": "verified",
+   "source": "waveshare-page"
+  },
+  {
+   "key": "brief.pi",
+   "value": "Raspberry Pi 5 on the top plate over the 40-pin UART",
+   "certainty": "user_supplied",
+   "source": "request"
+  },
+  {
+   "key": "brief.dock",
+   "value": "dock pad with two spring contacts under the belly",
+   "certainty": "user_supplied",
+   "source": "request"
+  },
+  {
+   "key": "pot.size",
+   "value": "12 cm thin grower pot",
+   "certainty": "user_supplied",
+   "source": "parts-list"
+  },
+  {
+   "key": "sensor.size",
+   "value": "DFRobot 0-200 klx ambient light sensor",
+   "certainty": "user_supplied",
+   "source": "parts-list"
+  },
+  {
+   "key": "req.payload",
+   "value": "carapace, Pi, sensors and planted pot together under 1 kg",
+   "certainty": "user_supplied",
+   "source": "request",
+   "requirement": true
+  },
+  {
+   "key": "req.carapace",
+   "value": "a printed shell that bolts to the top plate, hides the Pi and cells and cradles the pot",
+   "certainty": "user_supplied",
+   "source": "request",
+   "requirement": true
+  },
+  {
+   "key": "req.pot",
+   "value": "a light 12 cm plastic pot, not terracotta",
+   "certainty": "user_supplied",
+   "source": "request",
+   "requirement": true
+  },
+  {
+   "key": "req.no-mast",
+   "value": "no sensor mast: the light sensor sits under a small clear dome behind the pot",
+   "certainty": "user_supplied",
+   "source": "request",
+   "requirement": true
+  }
+ ],
+ "assets": [],
+ "parts": [
+  {
+   "id": "lower-plate",
+   "label": "Lower plate",
+   "role": "structure",
+   "stage": 0,
+   "basis": [
+    "hexarth.body-bottom"
+   ],
+   "shape": {
+    "type": "extrude",
+    "profile": [
+     [
+      0.062,
+      0.05
+     ],
+     [
+      0.042,
+      0.07
+     ],
+     [
+      -0.042,
+      0.07
+     ],
+     [
+      -0.062,
+      0.05
+     ],
+     [
+      -0.062,
+      -0.05
+     ],
+     [
+      -0.042,
+      -0.07
+     ],
+     [
+      0.042,
+      -0.07
+     ],
+     [
+      0.062,
+      -0.05
+     ]
+    ],
+    "height": 0.0026,
+    "axis": "y"
+   },
+   "at": [
+    0,
+    0.07368,
+    0
+   ],
+   "certainty": {
+    "size": "verified",
+    "shape": "inferred"
+   },
+   "source": "waveshare-drawing"
+  },
+  {
+   "id": "body-core",
+   "label": "Body core (ESP32 driver, 3s2p 18650 pack)",
+   "role": "mass",
+   "stage": 0,
+   "basis": [
+    "hexarth.body-bottom",
+    "hexarth.cells"
+   ],
+   "shape": {
+    "type": "extrude",
+    "profile": [
+     [
+      0.042,
+      0.038
+     ],
+     [
+      0.03,
+      0.05
+     ],
+     [
+      -0.03,
+      0.05
+     ],
+     [
+      -0.042,
+      0.038
+     ],
+     [
+      -0.042,
+      -0.038
+     ],
+     [
+      -0.03,
+      -0.05
+     ],
+     [
+      0.03,
+      -0.05
+     ],
+     [
+      0.042,
+      -0.038
+     ]
+    ],
+    "height": 0.04972,
+    "axis": "y"
+   },
+   "at": [
+    0,
+    0.07628,
+    0
+   ],
+   "look": {
+    "fill": "dark"
+   },
+   "certainty": "inferred"
+  },
+  {
+   "id": "deck",
+   "label": "Deck plate",
+   "role": "structure",
+   "stage": 1,
+   "basis": [
+    "hexarth.body-bottom"
+   ],
+   "shape": {
+    "type": "extrude",
+    "profile": [
+     [
+      0.062,
+      0.05
+     ],
+     [
+      0.042,
+      0.07
+     ],
+     [
+      -0.042,
+      0.07
+     ],
+     [
+      -0.062,
+      0.05
+     ],
+     [
+      -0.062,
+      -0.05
+     ],
+     [
+      -0.042,
+      -0.07
+     ],
+     [
+      0.042,
+      -0.07
+     ],
+     [
+      0.062,
+      -0.05
+     ]
+    ],
+    "height": 0.0026,
+    "axis": "y"
+   },
+   "at": [
+    0,
+    0.126,
+    0
+   ],
+   "certainty": {
+    "size": "verified",
+    "shape": "inferred"
+   },
+   "source": "waveshare-drawing"
+  },
+  {
+   "id": "side-rail",
+   "label": "Side rail",
+   "role": "structure",
+   "stage": 3,
+   "basis": [
+    "hexarth.body-bottom"
+   ],
+   "shape": {
+    "type": "box",
+    "size": [
+     0.003,
+     0.04,
+     0.096
+    ]
+   },
+   "at": [
+    0.049,
+    0.098,
+    0.0
+   ],
+   "mirror": "x",
+   "certainty": {
+    "size": "verified",
+    "shape": "inferred"
+   },
+   "source": "waveshare-drawing"
+  },
+  {
+   "id": "standoff",
+   "label": "Standoffs",
+   "role": "detail",
+   "stage": 1,
+   "basis": [
+    "hexarth.top-plate"
+   ],
+   "shape": {
+    "type": "cylinder",
+    "radius": 0.0034,
+    "height": 0.0238,
+    "segments": 10
+   },
+   "at": [
+    0.038,
+    0.1286,
+    -0.05
+   ],
+   "repeat": {
+    "count": 3,
+    "step": {
+     "at": [
+      0,
+      0,
+      0.05
+     ]
+    }
+   },
+   "mirror": "x",
+   "certainty": {
+    "size": "verified",
+    "shape": "inferred"
+   },
+   "source": "waveshare-drawing"
+  },
+  {
+   "id": "pi-5",
+   "label": "Raspberry Pi 5 (host)",
+   "role": "identity",
+   "stage": 2,
+   "basis": [
+    "brief.pi"
+   ],
+   "shape": {
+    "type": "box",
+    "size": [
+     0.056,
+     0.016,
+     0.086
+    ],
+    "anchor": "base"
+   },
+   "at": [
+    0.0,
+    0.137,
+    -0.004
+   ],
+   "certainty": "inferred"
+  },
+  {
+   "id": "top-plate",
+   "label": "Top plate",
+   "role": "structure",
+   "stage": 2,
+   "basis": [
+    "hexarth.top-plate",
+    "hexarth.height"
+   ],
+   "certainty": "verified",
+   "source": "waveshare-drawing",
+   "shape": {
+    "type": "extrude",
+    "profile": [
+     [
+      0.068,
+      0.054
+     ],
+     [
+      0.046,
+      0.076
+     ],
+     [
+      -0.046,
+      0.076
+     ],
+     [
+      -0.068,
+      0.054
+     ],
+     [
+      -0.068,
+      -0.054
+     ],
+     [
+      -0.046,
+      -0.076
+     ],
+     [
+      0.046,
+      -0.076
+     ],
+     [
+      0.068,
+      -0.054
+     ]
+    ],
+    "height": 0.00248,
+    "axis": "y"
+   },
+   "at": [
+    0,
+    0.1524,
+    0
+   ]
+  },
+  {
+   "id": "oled-window",
+   "label": "OLED window",
+   "role": "detail",
+   "stage": 1,
+   "basis": [
+    "hexarth.oled"
+   ],
+   "shape": {
+    "type": "plane",
+    "size": [
+     0.03,
+     0.012
+    ]
+   },
+   "at": [
+    0.0,
+    0.1,
+    0.0501
+   ],
+   "look": {
+    "fill": "glass"
+   },
+   "certainty": {
+    "size": "verified",
+    "shape": "inferred"
+   },
+   "source": "waveshare-drawing"
+  },
+  {
+   "id": "belly-contact",
+   "label": "Belly charge contact",
+   "role": "data",
+   "stage": 1,
+   "basis": [
+    "brief.dock"
+   ],
+   "shape": {
+    "type": "cylinder",
+    "radius": 0.0055,
+    "height": 0.0016,
+    "segments": 20
+   },
+   "at": [
+    0.022,
+    0.07208,
+    0.0
+   ],
+   "mirror": "x",
+   "certainty": "inferred"
+  },
+  {
+   "id": "coxa-servo-front",
+   "label": "Coxa servo (front)",
+   "role": "structure",
+   "stage": 2,
+   "basis": [
+    "hexarth.servo-size",
+    "hexarth.hips"
+   ],
+   "mirror": "x",
+   "shape": {
+    "type": "box",
+    "size": [
+     0.0452,
+     0.0373,
+     0.0247
+    ],
+    "anchor": "center"
+   },
+   "at": [
+    0.03615,
+    0.09585,
+    0.03329
+   ],
+   "rotate": [
+    0,
+    149.0,
+    0
+   ],
+   "certainty": {
+    "size": "verified",
+    "shape": "inferred"
+   },
+   "source": "waveshare-drawing"
+  },
+  {
+   "id": "hip-bracket-front",
+   "label": "Hip bracket (front)",
+   "role": "structure",
+   "stage": 3,
+   "basis": [
+    "hexarth.hips"
+   ],
+   "mirror": "x",
+   "shape": {
+    "type": "box",
+    "size": [
+     0.027,
+     0.036,
+     0.022
+    ]
+   },
+   "at": [
+    0.04852,
+    0.115,
+    0.05386
+   ],
+   "rotate": [
+    0,
+    59.0,
+    0
+   ],
+   "certainty": "inferred"
+  },
+  {
+   "id": "femur-front",
+   "label": "Femur servo and arm (front)",
+   "role": "mass",
+   "stage": 3,
+   "basis": [
+    "hexarth.L1",
+    "hexarth.servo-size"
+   ],
+   "mirror": "x",
+   "shape": {
+    "type": "tube",
+    "path": [
+     [
+      0.048,
+      0.117,
+      0.053
+     ],
+     [
+      0.09816,
+      0.10612,
+      0.13648
+     ]
+    ],
+    "radius": 0.017,
+    "sides": 4,
+    "caps": true
+   },
+   "certainty": "inferred"
+  },
+  {
+   "id": "knee-front",
+   "label": "Knee block (front)",
+   "role": "structure",
+   "stage": 4,
+   "basis": [
+    "hexarth.L1"
+   ],
+   "mirror": "x",
+   "shape": {
+    "type": "sphere",
+    "radius": 0.015,
+    "lat": 4,
+    "lon": 8
+   },
+   "at": [
+    0.09816,
+    0.10612,
+    0.13648
+   ],
+   "certainty": "inferred"
+  },
+  {
+   "id": "tibia-servo-front",
+   "label": "Tibia servo (front)",
+   "role": "mass",
+   "stage": 4,
+   "basis": [
+    "hexarth.L2",
+    "hexarth.servo-size"
+   ],
+   "mirror": "x",
+   "shape": {
+    "type": "tube",
+    "path": [
+     [
+      0.09816,
+      0.10612,
+      0.13648
+     ],
+     [
+      0.10457,
+      0.066,
+      0.14714
+     ]
+    ],
+    "radius": 0.016,
+    "sides": 4,
+    "caps": true
+   },
+   "certainty": "inferred"
+  },
+  {
+   "id": "foot-tube-front",
+   "label": "Carbon foot tube (front)",
+   "role": "structure",
+   "stage": 5,
+   "basis": [
+    "hexarth.L2",
+    "hexarth.foot-tube"
+   ],
+   "mirror": "x",
+   "shape": {
+    "type": "tube",
+    "path": [
+     [
+      0.10457,
+      0.066,
+      0.14714
+     ],
+     [
+      0.11341,
+      0.0146,
+      0.16186
+     ]
+    ],
+    "radius": 0.01,
+    "sides": 10,
+    "caps": true
+   },
+   "certainty": "inferred"
+  },
+  {
+   "id": "foot-tip-front",
+   "label": "Rubber foot tip (front)",
+   "role": "identity",
+   "stage": 5,
+   "basis": [
+    "hexarth.foot-tube"
+   ],
+   "mirror": "x",
+   "shape": {
+    "type": "sphere",
+    "radius": 0.0106,
+    "lat": 6,
+    "lon": 12
+   },
+   "at": [
+    0.11341,
+    0.0106,
+    0.16186
+   ],
+   "certainty": "inferred"
+  },
+  {
+   "id": "coxa-servo-middle",
+   "label": "Coxa servo (middle)",
+   "role": "structure",
+   "stage": 2,
+   "basis": [
+    "hexarth.servo-size",
+    "hexarth.hips"
+   ],
+   "mirror": "x",
+   "shape": {
+    "type": "box",
+    "size": [
+     0.0452,
+     0.0373,
+     0.0247
+    ],
+    "anchor": "center"
+   },
+   "at": [
+    0.0551,
+    0.09585,
+    -0.0
+   ],
+   "rotate": [
+    0,
+    90.0,
+    0
+   ],
+   "certainty": {
+    "size": "verified",
+    "shape": "inferred"
+   },
+   "source": "waveshare-drawing"
+  },
+  {
+   "id": "hip-bracket-middle",
+   "label": "Hip bracket (middle)",
+   "role": "structure",
+   "stage": 3,
+   "basis": [
+    "hexarth.hips"
+   ],
+   "mirror": "x",
+   "shape": {
+    "type": "box",
+    "size": [
+     0.027,
+     0.036,
+     0.022
+    ]
+   },
+   "at": [
+    0.0791,
+    0.115,
+    0.0
+   ],
+   "rotate": [
+    0,
+    0.0,
+    0
+   ],
+   "certainty": "inferred"
+  },
+  {
+   "id": "femur-middle",
+   "label": "Femur servo and arm (middle)",
+   "role": "mass",
+   "stage": 3,
+   "basis": [
+    "hexarth.L1",
+    "hexarth.servo-size"
+   ],
+   "mirror": "x",
+   "shape": {
+    "type": "tube",
+    "path": [
+     [
+      0.0781,
+      0.117,
+      0.0
+     ],
+     [
+      0.17549,
+      0.10612,
+      0.0
+     ]
+    ],
+    "radius": 0.017,
+    "sides": 4,
+    "caps": true
+   },
+   "certainty": "inferred"
+  },
+  {
+   "id": "knee-middle",
+   "label": "Knee block (middle)",
+   "role": "structure",
+   "stage": 4,
+   "basis": [
+    "hexarth.L1"
+   ],
+   "mirror": "x",
+   "shape": {
+    "type": "sphere",
+    "radius": 0.015,
+    "lat": 4,
+    "lon": 8
+   },
+   "at": [
+    0.17549,
+    0.10612,
+    0.0
+   ],
+   "certainty": "inferred"
+  },
+  {
+   "id": "tibia-servo-middle",
+   "label": "Tibia servo (middle)",
+   "role": "mass",
+   "stage": 4,
+   "basis": [
+    "hexarth.L2",
+    "hexarth.servo-size"
+   ],
+   "mirror": "x",
+   "shape": {
+    "type": "tube",
+    "path": [
+     [
+      0.17549,
+      0.10612,
+      0.0
+     ],
+     [
+      0.18793,
+      0.066,
+      0.0
+     ]
+    ],
+    "radius": 0.016,
+    "sides": 4,
+    "caps": true
+   },
+   "certainty": "inferred"
+  },
+  {
+   "id": "foot-tube-middle",
+   "label": "Carbon foot tube (middle)",
+   "role": "structure",
+   "stage": 5,
+   "basis": [
+    "hexarth.L2",
+    "hexarth.foot-tube"
+   ],
+   "mirror": "x",
+   "shape": {
+    "type": "tube",
+    "path": [
+     [
+      0.18793,
+      0.066,
+      0.0
+     ],
+     [
+      0.2051,
+      0.0146,
+      0.0
+     ]
+    ],
+    "radius": 0.01,
+    "sides": 10,
+    "caps": true
+   },
+   "certainty": "inferred"
+  },
+  {
+   "id": "foot-tip-middle",
+   "label": "Rubber foot tip (middle)",
+   "role": "identity",
+   "stage": 5,
+   "basis": [
+    "hexarth.foot-tube"
+   ],
+   "mirror": "x",
+   "shape": {
+    "type": "sphere",
+    "radius": 0.0106,
+    "lat": 6,
+    "lon": 12
+   },
+   "at": [
+    0.2051,
+    0.0106,
+    0.0
+   ],
+   "certainty": "inferred"
+  },
+  {
+   "id": "coxa-servo-rear",
+   "label": "Coxa servo (rear)",
+   "role": "structure",
+   "stage": 2,
+   "basis": [
+    "hexarth.servo-size",
+    "hexarth.hips"
+   ],
+   "mirror": "x",
+   "shape": {
+    "type": "box",
+    "size": [
+     0.0452,
+     0.0373,
+     0.0247
+    ],
+    "anchor": "center"
+   },
+   "at": [
+    0.03615,
+    0.09585,
+    -0.03329
+   ],
+   "rotate": [
+    0,
+    31.0,
+    0
+   ],
+   "certainty": {
+    "size": "verified",
+    "shape": "inferred"
+   },
+   "source": "waveshare-drawing"
+  },
+  {
+   "id": "hip-bracket-rear",
+   "label": "Hip bracket (rear)",
+   "role": "structure",
+   "stage": 3,
+   "basis": [
+    "hexarth.hips"
+   ],
+   "mirror": "x",
+   "shape": {
+    "type": "box",
+    "size": [
+     0.027,
+     0.036,
+     0.022
+    ]
+   },
+   "at": [
+    0.04852,
+    0.115,
+    -0.05386
+   ],
+   "rotate": [
+    0,
+    -59.0,
+    0
+   ],
+   "certainty": "inferred"
+  },
+  {
+   "id": "femur-rear",
+   "label": "Femur servo and arm (rear)",
+   "role": "mass",
+   "stage": 3,
+   "basis": [
+    "hexarth.L1",
+    "hexarth.servo-size"
+   ],
+   "mirror": "x",
+   "shape": {
+    "type": "tube",
+    "path": [
+     [
+      0.048,
+      0.117,
+      -0.053
+     ],
+     [
+      0.09816,
+      0.10612,
+      -0.13648
+     ]
+    ],
+    "radius": 0.017,
+    "sides": 4,
+    "caps": true
+   },
+   "certainty": "inferred"
+  },
+  {
+   "id": "knee-rear",
+   "label": "Knee block (rear)",
+   "role": "structure",
+   "stage": 4,
+   "basis": [
+    "hexarth.L1"
+   ],
+   "mirror": "x",
+   "shape": {
+    "type": "sphere",
+    "radius": 0.015,
+    "lat": 4,
+    "lon": 8
+   },
+   "at": [
+    0.09816,
+    0.10612,
+    -0.13648
+   ],
+   "certainty": "inferred"
+  },
+  {
+   "id": "tibia-servo-rear",
+   "label": "Tibia servo (rear)",
+   "role": "mass",
+   "stage": 4,
+   "basis": [
+    "hexarth.L2",
+    "hexarth.servo-size"
+   ],
+   "mirror": "x",
+   "shape": {
+    "type": "tube",
+    "path": [
+     [
+      0.09816,
+      0.10612,
+      -0.13648
+     ],
+     [
+      0.10457,
+      0.066,
+      -0.14714
+     ]
+    ],
+    "radius": 0.016,
+    "sides": 4,
+    "caps": true
+   },
+   "certainty": "inferred"
+  },
+  {
+   "id": "foot-tube-rear",
+   "label": "Carbon foot tube (rear)",
+   "role": "structure",
+   "stage": 5,
+   "basis": [
+    "hexarth.L2",
+    "hexarth.foot-tube"
+   ],
+   "mirror": "x",
+   "shape": {
+    "type": "tube",
+    "path": [
+     [
+      0.10457,
+      0.066,
+      -0.14714
+     ],
+     [
+      0.11341,
+      0.0146,
+      -0.16186
+     ]
+    ],
+    "radius": 0.01,
+    "sides": 10,
+    "caps": true
+   },
+   "certainty": "inferred"
+  },
+  {
+   "id": "foot-tip-rear",
+   "label": "Rubber foot tip (rear)",
+   "role": "identity",
+   "stage": 5,
+   "basis": [
+    "hexarth.foot-tube"
+   ],
+   "mirror": "x",
+   "shape": {
+    "type": "sphere",
+    "radius": 0.0106,
+    "lat": 6,
+    "lon": 12
+   },
+   "at": [
+    0.11341,
+    0.0106,
+    -0.16186
+   ],
+   "certainty": "inferred"
+  },
+  {
+   "id": "carapace",
+   "label": "Printed carapace, PETG ribbed thin wall",
+   "role": "mass",
+   "stage": 6,
+   "basis": [
+    "req.carapace",
+    "hexarth.top-plate",
+    "req.payload"
+   ],
+   "shape": {
+    "type": "loft",
+    "sections": [
+     [
+      -0.0995,
+      0.01597,
+      0.146,
+      0.152
+     ],
+     [
+      -0.08942,
+      0.05005,
+      0.146,
+      0.17568
+     ],
+     [
+      -0.07904,
+      0.06292,
+      0.146,
+      0.19106
+     ],
+     [
+      -0.06832,
+      0.0711,
+      0.146,
+      0.19991
+     ],
+     [
+      -0.05715,
+      0.07674,
+      0.146,
+      0.202
+     ],
+     [
+      -0.0454,
+      0.08063,
+      0.146,
+      0.202
+     ],
+     [
+      -0.03282,
+      0.08316,
+      0.146,
+      0.202
+     ],
+     [
+      -0.01885,
+      0.08457,
+      0.146,
+      0.202
+     ],
+     [
+      0.0,
+      0.085,
+      0.146,
+      0.202
+     ],
+     [
+      0.01885,
+      0.08457,
+      0.146,
+      0.202
+     ],
+     [
+      0.03282,
+      0.08316,
+      0.146,
+      0.202
+     ],
+     [
+      0.0454,
+      0.08063,
+      0.146,
+      0.202
+     ],
+     [
+      0.05715,
+      0.07674,
+      0.146,
+      0.202
+     ],
+     [
+      0.06832,
+      0.0711,
+      0.146,
+      0.19991
+     ],
+     [
+      0.07904,
+      0.06292,
+      0.146,
+      0.19106
+     ],
+     [
+      0.08942,
+      0.05005,
+      0.146,
+      0.17568
+     ],
+     [
+      0.0995,
+      0.01597,
+      0.146,
+      0.152
+     ]
+    ],
+    "round": 0.85
+   },
+   "certainty": "inferred"
+  },
+  {
+   "id": "carapace-skirt",
+   "label": "Carapace skirt edge",
+   "role": "identity",
+   "stage": 6,
+   "basis": [
+    "req.carapace"
+   ],
+   "shape": {
+    "type": "curve",
+    "closed": true,
+    "smooth": true,
+    "points": [
+     [
+      0.0,
+      0.146,
+      0.1
+     ],
+     [
+      0.01775,
+      0.146,
+      0.09934
+     ],
+     [
+      0.03005,
+      0.146,
+      0.09737
+     ],
+     [
+      0.0406,
+      0.146,
+      0.09409
+     ],
+     [
+      0.04987,
+      0.146,
+      0.08953
+     ],
+     [
+      0.05802,
+      0.146,
+      0.08369
+     ],
+     [
+      0.06511,
+      0.146,
+      0.0766
+     ],
+     [
+      0.07114,
+      0.146,
+      0.06826
+     ],
+     [
+      0.0761,
+      0.146,
+      0.05867
+     ],
+     [
+      0.07998,
+      0.146,
+      0.04776
+     ],
+     [
+      0.08276,
+      0.146,
+      0.03536
+     ],
+     [
+      0.08444,
+      0.146,
+      0.02088
+     ],
+     [
+      0.085,
+      0.146,
+      0.0
+     ],
+     [
+      0.08444,
+      0.146,
+      -0.02088
+     ],
+     [
+      0.08276,
+      0.146,
+      -0.03536
+     ],
+     [
+      0.07998,
+      0.146,
+      -0.04776
+     ],
+     [
+      0.0761,
+      0.146,
+      -0.05867
+     ],
+     [
+      0.07114,
+      0.146,
+      -0.06826
+     ],
+     [
+      0.06511,
+      0.146,
+      -0.0766
+     ],
+     [
+      0.05802,
+      0.146,
+      -0.08369
+     ],
+     [
+      0.04987,
+      0.146,
+      -0.08953
+     ],
+     [
+      0.0406,
+      0.146,
+      -0.09409
+     ],
+     [
+      0.03005,
+      0.146,
+      -0.09737
+     ],
+     [
+      0.01775,
+      0.146,
+      -0.09934
+     ],
+     [
+      0.0,
+      0.146,
+      -0.1
+     ],
+     [
+      -0.01775,
+      0.146,
+      -0.09934
+     ],
+     [
+      -0.03005,
+      0.146,
+      -0.09737
+     ],
+     [
+      -0.0406,
+      0.146,
+      -0.09409
+     ],
+     [
+      -0.04987,
+      0.146,
+      -0.08953
+     ],
+     [
+      -0.05802,
+      0.146,
+      -0.08369
+     ],
+     [
+      -0.06511,
+      0.146,
+      -0.0766
+     ],
+     [
+      -0.07114,
+      0.146,
+      -0.06826
+     ],
+     [
+      -0.0761,
+      0.146,
+      -0.05867
+     ],
+     [
+      -0.07998,
+      0.146,
+      -0.04776
+     ],
+     [
+      -0.08276,
+      0.146,
+      -0.03536
+     ],
+     [
+      -0.08444,
+      0.146,
+      -0.02088
+     ],
+     [
+      -0.085,
+      0.146,
+      -0.0
+     ],
+     [
+      -0.08444,
+      0.146,
+      0.02088
+     ],
+     [
+      -0.08276,
+      0.146,
+      0.03536
+     ],
+     [
+      -0.07998,
+      0.146,
+      0.04776
+     ],
+     [
+      -0.0761,
+      0.146,
+      0.05867
+     ],
+     [
+      -0.07114,
+      0.146,
+      0.06826
+     ],
+     [
+      -0.06511,
+      0.146,
+      0.0766
+     ],
+     [
+      -0.05802,
+      0.146,
+      0.08369
+     ],
+     [
+      -0.04987,
+      0.146,
+      0.08953
+     ],
+     [
+      -0.0406,
+      0.146,
+      0.09409
+     ],
+     [
+      -0.03005,
+      0.146,
+      0.09737
+     ],
+     [
+      -0.01775,
+      0.146,
+      0.09934
+     ]
+    ]
+   },
+   "certainty": "inferred"
+  },
+  {
+   "id": "grower-pot",
+   "label": "12 cm thin grower pot",
+   "role": "identity",
+   "stage": 7,
+   "basis": [
+    "req.pot",
+    "pot.size"
+   ],
+   "shape": {
+    "type": "lathe",
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.0475,
+      0
+     ],
+     [
+      0.06,
+      0.105
+     ],
+     [
+      0.0624,
+      0.105
+     ],
+     [
+      0.0624,
+      0.092
+     ],
+     [
+      0.0584,
+      0.092
+     ],
+     [
+      0,
+      0.092
+     ]
+    ],
+    "segments": 48,
+    "meridians": 12
+   },
+   "at": [
+    0.0,
+    0.158,
+    -0.006
+   ],
+   "certainty": "inferred"
+  },
+  {
+   "id": "soil",
+   "label": "LECA and light mix",
+   "role": "detail",
+   "stage": 7,
+   "basis": [
+    "req.payload"
+   ],
+   "shape": {
+    "type": "cylinder",
+    "radius": 0.056,
+    "height": 0.002,
+    "segments": 36
+   },
+   "at": [
+    0.0,
+    0.251,
+    -0.006
+   ],
+   "certainty": "inferred"
+  },
+  {
+   "id": "pothos-stem-0",
+   "label": "Pothos stem",
+   "role": "ornament",
+   "certainty": "decorative",
+   "stage": 7,
+   "basis": [],
+   "shape": {
+    "type": "tube",
+    "path": [
+     [
+      0.00313,
+      0.253,
+      0.01173
+     ],
+     [
+      0.0059,
+      0.325,
+      0.02748
+     ],
+     [
+      0.01007,
+      0.373,
+      0.05112
+     ]
+    ],
+    "radius": 0.0016,
+    "sides": 5
+   }
+  },
+  {
+   "id": "pothos-leaf-0-0",
+   "label": "Pothos leaf",
+   "role": "ornament",
+   "certainty": "decorative",
+   "stage": 7,
+   "basis": [],
+   "shape": {
+    "type": "sphere",
+    "radii": [
+     0.022,
+     0.005,
+     0.028
+    ],
+    "lat": 4,
+    "lon": 8
+   },
+   "at": [
+    0.0059,
+    0.325,
+    0.02748
+   ],
+   "rotate": [
+    25,
+    80,
+    0
+   ]
+  },
+  {
+   "id": "pothos-leaf-0-1",
+   "label": "Pothos leaf",
+   "role": "ornament",
+   "certainty": "decorative",
+   "stage": 7,
+   "basis": [],
+   "shape": {
+    "type": "sphere",
+    "radii": [
+     0.022,
+     0.005,
+     0.028
+    ],
+    "lat": 4,
+    "lon": 8
+   },
+   "at": [
+    0.01007,
+    0.373,
+    0.05112
+   ],
+   "rotate": [
+    25,
+    80,
+    0
+   ]
+  },
+  {
+   "id": "pothos-stem-1",
+   "label": "Pothos stem",
+   "role": "ornament",
+   "certainty": "decorative",
+   "stage": 7,
+   "basis": [],
+   "shape": {
+    "type": "tube",
+    "path": [
+     [
+      0.01739,
+      0.253,
+      -0.00134
+     ],
+     [
+      0.03864,
+      0.316,
+      0.00435
+     ],
+     [
+      0.07051,
+      0.358,
+      0.01289
+     ]
+    ],
+    "radius": 0.0016,
+    "sides": 5
+   }
+  },
+  {
+   "id": "pothos-leaf-1-0",
+   "label": "Pothos leaf",
+   "role": "ornament",
+   "certainty": "decorative",
+   "stage": 7,
+   "basis": [],
+   "shape": {
+    "type": "sphere",
+    "radii": [
+     0.022,
+     0.005,
+     0.028
+    ],
+    "lat": 4,
+    "lon": 8
+   },
+   "at": [
+    0.03864,
+    0.316,
+    0.00435
+   ],
+   "rotate": [
+    25,
+    15,
+    0
+   ]
+  },
+  {
+   "id": "pothos-leaf-1-1",
+   "label": "Pothos leaf",
+   "role": "ornament",
+   "certainty": "decorative",
+   "stage": 7,
+   "basis": [],
+   "shape": {
+    "type": "sphere",
+    "radii": [
+     0.022,
+     0.005,
+     0.028
+    ],
+    "lat": 4,
+    "lon": 8
+   },
+   "at": [
+    0.07051,
+    0.358,
+    0.01289
+   ],
+   "rotate": [
+    25,
+    15,
+    0
+   ]
+  },
+  {
+   "id": "pothos-stem-2",
+   "label": "Pothos stem",
+   "role": "ornament",
+   "certainty": "decorative",
+   "stage": 7,
+   "basis": [],
+   "shape": {
+    "type": "tube",
+    "path": [
+     [
+      0.01157,
+      0.253,
+      -0.01979
+     ],
+     [
+      0.02057,
+      0.328,
+      -0.03051
+     ],
+     [
+      0.03407,
+      0.378,
+      -0.0466
+     ]
+    ],
+    "radius": 0.0016,
+    "sides": 5
+   }
+  },
+  {
+   "id": "pothos-leaf-2-0",
+   "label": "Pothos leaf",
+   "role": "ornament",
+   "certainty": "decorative",
+   "stage": 7,
+   "basis": [],
+   "shape": {
+    "type": "sphere",
+    "radii": [
+     0.022,
+     0.005,
+     0.028
+    ],
+    "lat": 4,
+    "lon": 8
+   },
+   "at": [
+    0.02057,
+    0.328,
+    -0.03051
+   ],
+   "rotate": [
+    25,
+    -50,
+    0
+   ]
+  },
+  {
+   "id": "pothos-leaf-2-1",
+   "label": "Pothos leaf",
+   "role": "ornament",
+   "certainty": "decorative",
+   "stage": 7,
+   "basis": [],
+   "shape": {
+    "type": "sphere",
+    "radii": [
+     0.022,
+     0.005,
+     0.028
+    ],
+    "lat": 4,
+    "lon": 8
+   },
+   "at": [
+    0.03407,
+    0.378,
+    -0.0466
+   ],
+   "rotate": [
+    25,
+    -50,
+    0
+   ]
+  },
+  {
+   "id": "pothos-stem-3",
+   "label": "Pothos stem",
+   "role": "ornament",
+   "certainty": "decorative",
+   "stage": 7,
+   "basis": [],
+   "shape": {
+    "type": "tube",
+    "path": [
+     [
+      -0.00616,
+      0.253,
+      -0.02291
+     ],
+     [
+      -0.013,
+      0.319,
+      -0.04171
+     ],
+     [
+      -0.02326,
+      0.363,
+      -0.0699
+     ]
+    ],
+    "radius": 0.0016,
+    "sides": 5
+   }
+  },
+  {
+   "id": "pothos-leaf-3-0",
+   "label": "Pothos leaf",
+   "role": "ornament",
+   "certainty": "decorative",
+   "stage": 7,
+   "basis": [],
+   "shape": {
+    "type": "sphere",
+    "radii": [
+     0.022,
+     0.005,
+     0.028
+    ],
+    "lat": 4,
+    "lon": 8
+   },
+   "at": [
+    -0.013,
+    0.319,
+    -0.04171
+   ],
+   "rotate": [
+    25,
+    -110,
+    0
+   ]
+  },
+  {
+   "id": "pothos-leaf-3-1",
+   "label": "Pothos leaf",
+   "role": "ornament",
+   "certainty": "decorative",
+   "stage": 7,
+   "basis": [],
+   "shape": {
+    "type": "sphere",
+    "radii": [
+     0.022,
+     0.005,
+     0.028
+    ],
+    "lat": 4,
+    "lon": 8
+   },
+   "at": [
+    -0.02326,
+    0.363,
+    -0.0699
+   ],
+   "rotate": [
+    25,
+    -110,
+    0
+   ]
+  },
+  {
+   "id": "pothos-stem-4",
+   "label": "Pothos stem",
+   "role": "ornament",
+   "certainty": "decorative",
+   "stage": 7,
+   "basis": [],
+   "shape": {
+    "type": "tube",
+    "path": [
+     [
+      -0.01793,
+      0.253,
+      -0.00757
+     ],
+     [
+      -0.02989,
+      0.331,
+      -0.00861
+     ],
+     [
+      -0.04782,
+      0.383,
+      -0.01018
+     ]
+    ],
+    "radius": 0.0016,
+    "sides": 5
+   }
+  },
+  {
+   "id": "pothos-leaf-4-0",
+   "label": "Pothos leaf",
+   "role": "ornament",
+   "certainty": "decorative",
+   "stage": 7,
+   "basis": [],
+   "shape": {
+    "type": "sphere",
+    "radii": [
+     0.022,
+     0.005,
+     0.028
+    ],
+    "lat": 4,
+    "lon": 8
+   },
+   "at": [
+    -0.02989,
+    0.331,
+    -0.00861
+   ],
+   "rotate": [
+    25,
+    -175,
+    0
+   ]
+  },
+  {
+   "id": "pothos-leaf-4-1",
+   "label": "Pothos leaf",
+   "role": "ornament",
+   "certainty": "decorative",
+   "stage": 7,
+   "basis": [],
+   "shape": {
+    "type": "sphere",
+    "radii": [
+     0.022,
+     0.005,
+     0.028
+    ],
+    "lat": 4,
+    "lon": 8
+   },
+   "at": [
+    -0.04782,
+    0.383,
+    -0.01018
+   ],
+   "rotate": [
+    25,
+    -175,
+    0
+   ]
+  },
+  {
+   "id": "pothos-stem-5",
+   "label": "Pothos stem",
+   "role": "ornament",
+   "certainty": "decorative",
+   "stage": 7,
+   "basis": [],
+   "shape": {
+    "type": "tube",
+    "path": [
+     [
+      -0.01157,
+      0.253,
+      0.00779
+     ],
+     [
+      -0.027,
+      0.313,
+      0.02617
+     ],
+     [
+      -0.05014,
+      0.353,
+      0.05375
+     ]
+    ],
+    "radius": 0.0016,
+    "sides": 5
+   }
+  },
+  {
+   "id": "pothos-leaf-5-0",
+   "label": "Pothos leaf",
+   "role": "ornament",
+   "certainty": "decorative",
+   "stage": 7,
+   "basis": [],
+   "shape": {
+    "type": "sphere",
+    "radii": [
+     0.022,
+     0.005,
+     0.028
+    ],
+    "lat": 4,
+    "lon": 8
+   },
+   "at": [
+    -0.027,
+    0.313,
+    0.02617
+   ],
+   "rotate": [
+    25,
+    -230,
+    0
+   ]
+  },
+  {
+   "id": "pothos-leaf-5-1",
+   "label": "Pothos leaf",
+   "role": "ornament",
+   "certainty": "decorative",
+   "stage": 7,
+   "basis": [],
+   "shape": {
+    "type": "sphere",
+    "radii": [
+     0.022,
+     0.005,
+     0.028
+    ],
+    "lat": 4,
+    "lon": 8
+   },
+   "at": [
+    -0.05014,
+    0.353,
+    0.05375
+   ],
+   "rotate": [
+    25,
+    -230,
+    0
+   ]
+  },
+  {
+   "id": "pothos-stem-6",
+   "label": "Pothos stem",
+   "role": "ornament",
+   "certainty": "decorative",
+   "stage": 7,
+   "basis": [],
+   "shape": {
+    "type": "tube",
+    "path": [
+     [
+      0.01157,
+      0.253,
+      0.00779
+     ],
+     [
+      0.04821,
+      0.283,
+      0.05145
+     ],
+     [
+      0.07263,
+      0.233,
+      0.08056
+     ],
+     [
+      0.07569,
+      0.163,
+      0.0842
+     ]
+    ],
+    "radius": 0.0016,
+    "sides": 5
+   }
+  },
+  {
+   "id": "pothos-leaf-6-0",
+   "label": "Pothos leaf",
+   "role": "ornament",
+   "certainty": "decorative",
+   "stage": 7,
+   "basis": [],
+   "shape": {
+    "type": "sphere",
+    "radii": [
+     0.022,
+     0.005,
+     0.028
+    ],
+    "lat": 4,
+    "lon": 8
+   },
+   "at": [
+    0.04821,
+    0.283,
+    0.05145
+   ],
+   "rotate": [
+    25,
+    50,
+    0
+   ]
+  },
+  {
+   "id": "pothos-leaf-6-1",
+   "label": "Pothos leaf",
+   "role": "ornament",
+   "certainty": "decorative",
+   "stage": 7,
+   "basis": [],
+   "shape": {
+    "type": "sphere",
+    "radii": [
+     0.022,
+     0.005,
+     0.028
+    ],
+    "lat": 4,
+    "lon": 8
+   },
+   "at": [
+    0.07263,
+    0.233,
+    0.08056
+   ],
+   "rotate": [
+    25,
+    50,
+    0
+   ]
+  },
+  {
+   "id": "pothos-leaf-6-2",
+   "label": "Pothos leaf",
+   "role": "ornament",
+   "certainty": "decorative",
+   "stage": 7,
+   "basis": [],
+   "shape": {
+    "type": "sphere",
+    "radii": [
+     0.022,
+     0.005,
+     0.028
+    ],
+    "lat": 4,
+    "lon": 8
+   },
+   "at": [
+    0.07569,
+    0.163,
+    0.0842
+   ],
+   "rotate": [
+    25,
+    50,
+    0
+   ]
+  },
+  {
+   "id": "pothos-stem-7",
+   "label": "Pothos stem",
+   "role": "ornament",
+   "certainty": "decorative",
+   "stage": 7,
+   "basis": [],
+   "shape": {
+    "type": "tube",
+    "path": [
+     [
+      0.00313,
+      0.253,
+      -0.02373
+     ],
+     [
+      0.01354,
+      0.278,
+      -0.08282
+     ],
+     [
+      0.02049,
+      0.233,
+      -0.12221
+     ],
+     [
+      0.02136,
+      0.163,
+      -0.12713
+     ]
+    ],
+    "radius": 0.0016,
+    "sides": 5
+   }
+  },
+  {
+   "id": "pothos-leaf-7-0",
+   "label": "Pothos leaf",
+   "role": "ornament",
+   "certainty": "decorative",
+   "stage": 7,
+   "basis": [],
+   "shape": {
+    "type": "sphere",
+    "radii": [
+     0.022,
+     0.005,
+     0.028
+    ],
+    "lat": 4,
+    "lon": 8
+   },
+   "at": [
+    0.01354,
+    0.278,
+    -0.08282
+   ],
+   "rotate": [
+    25,
+    -80,
+    0
+   ]
+  },
+  {
+   "id": "pothos-leaf-7-1",
+   "label": "Pothos leaf",
+   "role": "ornament",
+   "certainty": "decorative",
+   "stage": 7,
+   "basis": [],
+   "shape": {
+    "type": "sphere",
+    "radii": [
+     0.022,
+     0.005,
+     0.028
+    ],
+    "lat": 4,
+    "lon": 8
+   },
+   "at": [
+    0.02049,
+    0.233,
+    -0.12221
+   ],
+   "rotate": [
+    25,
+    -80,
+    0
+   ]
+  },
+  {
+   "id": "pothos-leaf-7-2",
+   "label": "Pothos leaf",
+   "role": "ornament",
+   "certainty": "decorative",
+   "stage": 7,
+   "basis": [],
+   "shape": {
+    "type": "sphere",
+    "radii": [
+     0.022,
+     0.005,
+     0.028
+    ],
+    "lat": 4,
+    "lon": 8
+   },
+   "at": [
+    0.02136,
+    0.163,
+    -0.12713
+   ],
+   "rotate": [
+    25,
+    -80,
+    0
+   ]
+  },
+  {
+   "id": "pothos-stem-8",
+   "label": "Pothos stem",
+   "role": "ornament",
+   "certainty": "decorative",
+   "stage": 7,
+   "basis": [],
+   "shape": {
+    "type": "tube",
+    "path": [
+     [
+      -0.01691,
+      0.253,
+      0.00016
+     ],
+     [
+      -0.06766,
+      0.288,
+      0.01863
+     ],
+     [
+      -0.10149,
+      0.233,
+      0.03094
+     ],
+     [
+      -0.10572,
+      0.163,
+      0.03248
+     ]
+    ],
+    "radius": 0.0016,
+    "sides": 5
+   }
+  },
+  {
+   "id": "pothos-leaf-8-0",
+   "label": "Pothos leaf",
+   "role": "ornament",
+   "certainty": "decorative",
+   "stage": 7,
+   "basis": [],
+   "shape": {
+    "type": "sphere",
+    "radii": [
+     0.022,
+     0.005,
+     0.028
+    ],
+    "lat": 4,
+    "lon": 8
+   },
+   "at": [
+    -0.06766,
+    0.288,
+    0.01863
+   ],
+   "rotate": [
+    25,
+    -200,
+    0
+   ]
+  },
+  {
+   "id": "pothos-leaf-8-1",
+   "label": "Pothos leaf",
+   "role": "ornament",
+   "certainty": "decorative",
+   "stage": 7,
+   "basis": [],
+   "shape": {
+    "type": "sphere",
+    "radii": [
+     0.022,
+     0.005,
+     0.028
+    ],
+    "lat": 4,
+    "lon": 8
+   },
+   "at": [
+    -0.10149,
+    0.233,
+    0.03094
+   ],
+   "rotate": [
+    25,
+    -200,
+    0
+   ]
+  },
+  {
+   "id": "pothos-leaf-8-2",
+   "label": "Pothos leaf",
+   "role": "ornament",
+   "certainty": "decorative",
+   "stage": 7,
+   "basis": [],
+   "shape": {
+    "type": "sphere",
+    "radii": [
+     0.022,
+     0.005,
+     0.028
+    ],
+    "lat": 4,
+    "lon": 8
+   },
+   "at": [
+    -0.10572,
+    0.163,
+    0.03248
+   ],
+   "rotate": [
+    25,
+    -200,
+    0
+   ]
+  },
+  {
+   "id": "light-sensor-dome",
+   "label": "Light sensor under a clear dome",
+   "role": "data",
+   "stage": 7,
+   "basis": [
+    "req.no-mast",
+    "sensor.size"
+   ],
+   "shape": {
+    "type": "sphere",
+    "radius": 0.011,
+    "lat": 6,
+    "lon": 16,
+    "anchor": "center"
+   },
+   "at": [
+    0.0,
+    0.18203,
+    -0.083
+   ],
+   "look": {
+    "fill": "glass"
+   },
+   "certainty": "inferred"
+  }
+ ],
+ "articulations": [
+  {
+   "id": "pot-lift",
+   "type": "lift",
+   "parts": [
+    "grower-pot",
+    "soil",
+    "pothos-stem-0",
+    "pothos-leaf-0-0",
+    "pothos-leaf-0-1",
+    "pothos-stem-1",
+    "pothos-leaf-1-0",
+    "pothos-leaf-1-1",
+    "pothos-stem-2",
+    "pothos-leaf-2-0",
+    "pothos-leaf-2-1",
+    "pothos-stem-3",
+    "pothos-leaf-3-0",
+    "pothos-leaf-3-1",
+    "pothos-stem-4",
+    "pothos-leaf-4-0",
+    "pothos-leaf-4-1",
+    "pothos-stem-5",
+    "pothos-leaf-5-0",
+    "pothos-leaf-5-1",
+    "pothos-stem-6",
+    "pothos-leaf-6-0",
+    "pothos-leaf-6-1",
+    "pothos-leaf-6-2",
+    "pothos-stem-7",
+    "pothos-leaf-7-0",
+    "pothos-leaf-7-1",
+    "pothos-leaf-7-2",
+    "pothos-stem-8",
+    "pothos-leaf-8-0",
+    "pothos-leaf-8-1",
+    "pothos-leaf-8-2"
+   ],
+   "axis": [
+    0,
+    1,
+    0
+   ],
+   "amount": 0.11,
+   "order": 0
+  }
+ ],
+ "annotations": [
+  {
+   "id": "a-carapace",
+   "text": "Printed carapace (original design)",
+   "part": "carapace",
+   "offset": [
+    0.09,
+    0.03,
+    0
+   ]
+  },
+  {
+   "id": "a-pot",
+   "text": "12 cm grower pot, under 1 kg payload",
+   "part": "grower-pot",
+   "offset": [
+    0,
+    0.02,
+    0
+   ]
+  },
+  {
+   "id": "a-sensor",
+   "text": "Light sensor dome, no mast",
+   "part": "light-sensor-dome",
+   "offset": [
+    0,
+    0.04,
+    -0.03
+   ]
+  },
+  {
+   "id": "a-legs",
+   "text": "HexArth legs, 3 servos each",
+   "part": "foot-tip-front",
+   "offset": [
+    0.03,
+    0.05,
+    0
+   ]
+  },
+  {
+   "id": "a-plant",
+   "text": "Pothos (decorative)",
+   "part": "pothos-stem-4",
+   "offset": [
+    0,
+    0.02,
+    0
+   ]
+  }
+ ],
+ "presentation": {
+  "framing": {
+   "yaw": 35,
+   "pitch": 20
+  },
+  "views": [
+   {
+    "id": "open",
+    "label": "Pot lifted from its cradle",
+    "yaw": 30,
+    "pitch": 28,
+    "distance": 1.1
+   },
+   {
+    "id": "leg",
+    "label": "Front leg",
+    "yaw": 50,
+    "pitch": 6,
+    "distance": 2.2,
+    "target": "femur-front"
+   }
+  ],
+  "atmosphere": {
+   "haze": 0.7,
+   "grid": true,
+   "projector": false
+  },
+  "still_pose": "closed"
+ },
+ "animation": {
+  "assembly": {
+   "style": "build",
+   "seconds": 7.0,
+   "interference": true
+  },
+  "idle": {
+   "life": "calm",
+   "events": [
+    "scan",
+    "shimmer"
+   ],
+   "cadence": [
+    6,
+    12
+   ],
+   "strength": 0.5
+  },
+  "camera": {
+   "drift": 6,
+   "breathe": 0.03
+  }
+ },
+ "authoring": {
+  "tier": "quick",
+  "research": "not_needed"
+ }
+}
