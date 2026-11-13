@@ -46,8 +46,9 @@ The full pipeline, with every lesson from the first runs, is in
 
 ## Showcase: for prototypes that already exist
 
-Quick creative builds pile up with open PRs, a template README and no screenshots. One command
-takes a project from "works on my machine" to a page:
+Quick creative builds pile up with open PRs, a template README and no screenshots, and quick
+explorations end with no repo at all. One command takes a project from "works on my machine"
+to a repo, a README, a findings doc and a page:
 
 ```
 /concept-lab:showcase ~/ClaudeCode Projects/<project>
@@ -55,12 +56,17 @@ takes a project from "works on my machine" to a page:
 
 | Stage | What happens |
 |---|---|
-| 1. Audit | Open PRs and their checks, unpushed work, how to run it, what is worth showing. **Stops here for a go.** |
-| 2. Merge | Approved PRs merged after green checks, confirmed on main |
-| 3. Capture | Runs the app from main and takes real screenshots and a short screen clip in the Browser pane |
-| 4. README | What it does, a screenshot at the top, commands that worked, an honest Status section |
-| 5. Hero (optional) | The real screenshot placed on a device in a setting, captioned as a mockup |
-| 6. Page | A draft entry under "More from GitHub" on the site, with captures, a diagram and the clip |
+| 1. Audit | Repo or none, open PRs and their checks, unpushed work, bundled third-party material, how to run it, what is worth showing. Asks which code licence to add. **Stops here for a go.** |
+| 2. Repo setup | Only when there is no repo: folder under `~/ClaudeCode Projects`, main starts with `.gitignore` alone, work on a branch, tracked files checked for private paths, names and credentials, private GitHub repo, PR |
+| 3. Licences | Every bundled dataset, model, font, image, sound and copied file sorted by licence; what cannot be shared moves to an optional ignored file |
+| 4. Merge | Approved PRs merged after green checks, confirmed on main |
+| 5. Capture | Runs the app from main and takes real screenshots and a short screen clip in the Browser pane |
+| 6. README | What it does, a screenshot at the top, commands that worked, sources and credits, an honest Status section |
+| 7. Findings | `docs/FINDINGS.md`: what was explored and found, each decision with its why, what was dropped, what is open or unverified |
+| 8. Hero (optional) | The real screenshot placed on a device in a setting, captioned as a mockup |
+| 9. Page | A draft entry under "More from GitHub" on the site, with captures, a diagram and the clip |
+
+Stages that do not apply are skipped. A new repo stays private until Nick says otherwise.
 
 The difference from `concept`: the project exists, so every picture is a real capture of it
 running. Details in [`skills/showcase/SKILL.md`](skills/showcase/SKILL.md).
@@ -70,6 +76,7 @@ running. Details in [`skills/showcase/SKILL.md`](skills/showcase/SKILL.md).
 | Path | What |
 |---|---|
 | `skills/concept/SKILL.md` | The pipeline Claude follows |
+| `skills/showcase/SKILL.md` | The showcase pipeline; `scripts/private-check.sh` is its check before a first push |
 | `hooks/` | Guards that run before every shell command in this repo (below) |
 | `templates/` | Brief, parts, repo README and case-study skeletons |
 | `concepts/<slug>/` | One folder per concept: brief, parts, `cad/` (Blender script, STLs), `blender/` (.blend, GLBs), `render/` (shot renders, photos, comparison sheet), `video/`, `log.md` |
