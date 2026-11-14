@@ -1,7 +1,7 @@
 {
   "name": "concept-lab",
   "description": "Two skills for showing work on vyhouski.com. concept: an idea that is not built yet becomes a page from a Blender model, render-to-photo stills and a Seedance clip. showcase: a prototype or exploration that exists gets a repo if it has none, a licence check on bundled material, its PRs merged, real screenshots, a README, a findings doc and a draft page. Ships a hook that keeps concept photos Blender-first and commits clean.",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "author": {
     "name": "Nick Vyhouski",
     "email": "mvyhouski@gmail.com"
