@@ -16,6 +16,7 @@ before the build exists.
 |---|---|---|---|
 | Robot Planter | A plant pot on wheels that finds the sun and wanders the yard at night | [live](https://vyhouski.com/projects/robot-planter) | [weeeha/robot-planter](https://github.com/weeeha/robot-planter) |
 | Walking Planter | The same idea on a Waveshare HexArth hexapod: sits all day, walks to follow the sun | [live](https://vyhouski.com/projects/walking-planter) | weeeha/walking-planter (private) |
+| Fart Valve | Sawada's singing robot mouth pointed at the other end: real air through a silicone ring, tuned by listening | [unlisted](https://vyhouski.com/projects/fart-valve) | weeeha/fart-valve (private) |
 
 Showcased with `showcase`: Photo Recreations (weeeha/photo-recreations, draft page).
 
